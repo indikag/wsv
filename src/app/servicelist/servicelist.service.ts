@@ -8,6 +8,6 @@ export class ServiceListService {
    constructor(private http: Http, private router: Router) { }
 
    getAllService() {
-      return this.http.get('../data/servicelist.json').map(res => res.json());
+    //   return this.http.get('../data/servicelist.json').map(res => res.json());
    }
 }
