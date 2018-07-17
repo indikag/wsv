@@ -1,0 +1,32 @@
+<div class="example-container">
+  <mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <span>APP NAME</span>
+      <span class="example-spacer"></span>
+      <div class="button-row">
+        <button mat-icon-button (click)="myProfileBtnClick()">
+          <mat-icon aria-label="Example icon-button with a heart icon">account_circle</mat-icon>
+        </button>
+        <button mat-icon-button (click)="settingsBtnClick()">
+          <mat-icon aria-label="Example icon-button with a heart icon">settings</mat-icon>
+        </button>
+      </div>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+  <mat-sidenav-container class="example-sidenav-container" autosize>
+    <mat-sidenav #sideNav disableClose='false' hasBackdrop='false' mode='over' position="end">
+      <div class="slidebar" *ngIf="sideNavType == 'my_profile'">
+        <div layout="row" layout-padding>
+          <h4 class="mat-display-1" flex="10">My Profile</h4>
+        </div>
+      </div>
+      <div class="slidebar" *ngIf="sideNavType == 'settings'">
+        <p>settings</p>
+      </div>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <app-servicelist></app-servicelist>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

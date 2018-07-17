@@ -1,0 +1,76 @@
+{
+   "serviceList": [
+      {
+         "serviceName": "Bradford Brothers Service",
+         "published": "true",
+         "publishedDate": "17-06-2018",
+         "lastmodifieddate": "",
+         "serviceURL": "http:\\\\www.bradfordbrothersservice\\",
+         "userList": [
+            {
+               "userName": "Shanaka Chethana"
+            },
+            {
+               "userName": "Indika Gunawardana"
+            },
+            {
+               "userName": "Thanuj Igalawithana"
+            }
+         ]
+      },
+      {
+         "serviceName": "Axis CMS Service",
+         "published": "true",
+         "publishedDate": "17-06-2018",
+         "lastmodifieddate": "",
+         "serviceURL": "http:\\\\www.axiscmsservice\\",
+         "userList": [
+            {
+               "userName": "Shanaka Chethana"
+            },
+            {
+               "userName": "Indika Gunawardana"
+            },
+            {
+               "userName": "Thanuj Igalawithana"
+            }
+         ]
+      },
+      {
+         "serviceName": "Symbiosis Service",
+         "published": "false",
+         "publishedDate": "",
+         "lastmodifieddate": "17-06-2018",
+         "serviceURL": "http:\\\\www.symbiosisservice\\",
+         "userList": [
+            {
+               "userName": "Shanaka Chethana"
+            },
+            {
+               "userName": "Indika Gunawardana"
+            },
+            {
+               "userName": "Thanuj Igalawithana"
+            }
+         ]
+      },
+      {
+         "serviceName": "Exxon Mobi Service",
+         "published": "false",
+         "publishedDate": "",
+         "lastmodifieddate": "17-06-2018",
+         "serviceURL": "http:\\\\www.exxonmobiservice\\",
+         "userList": [
+            {
+               "userName": "Shanaka Chethana"
+            },
+            {
+               "userName": "Indika Gunawardana"
+            },
+            {
+               "userName": "Thanuj Igalawithana"
+            }
+         ]
+      }
+   ]
+}
