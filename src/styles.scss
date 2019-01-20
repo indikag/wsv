@@ -1,0 +1,605 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "~bootstrap/dist/css/bootstrap.min.css";
+
+$primary-color-acent: #7B1FA2;
+$primary-color: #6A1B9A;
+
+html,
+body {
+    height: 100%;
+}
+
+.container {
+    min-height: 100%;
+}
+
+body {
+    background-color: #EDE7F6;
+    font-size: 14px;
+}
+
+.box-shadow {
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+.main-panel {
+    padding-top: 54px;
+    height: 100%
+}
+
+.btn-primary:hover,
+.btn-primary:active,
+.btn-primary:visited {
+    color: #212121 !important;
+    background-color: $primary-color-acent !important;
+    border-color: $primary-color-acent !important;
+}
+
+/* .btn-primary:disabled {
+   color: #fff;
+   background-color: #6c757d;
+   border-color: #6c757d;
+}
+
+.btn-primary:disabled:hover {
+  cursor: not-allowed
+} */
+
+.btn-primary {
+    color: #ffffff !important;
+    background-color: $primary-color !important;
+    border-color: $primary-color !important;
+}
+
+.btn-outline-primary:hover,
+.btn-outline-primary:active,
+.btn-outline-primary:visited {
+    color: #ffffff !important;
+    background-color: $primary-color !important;
+    border-color: $primary-color !important;
+}
+
+.btn-outline-primary:disabled {
+    color: #e59f2eb0 !important;
+    background-color: transparent !important;
+}
+
+.btn-outline-primary:disabled:hover {
+    cursor: not-allowed
+}
+.btn-outline-info:disabled:hover {
+    cursor: not-allowed
+}
+.btn-outline-warning:disabled:hover {
+    cursor: not-allowed
+}
+.btn-outline-danger:disabled:hover {
+    cursor: not-allowed
+}
+.btn-outline-success:disabled:hover {
+    cursor: not-allowed
+}
+
+.btn-outline-primary {
+    color: $primary-color-acent !important;
+    background-color: transparent !important;
+    border-color: $primary-color-acent !important;
+}
+
+.link-primary {
+    color: $primary-color-acent !important;
+    cursor: pointer;
+}
+
+.link-primary:hover,
+.link-primary:active,
+.link-primary:visited {
+    color: $primary-color-acent !important;
+    text-decoration: underline !important;
+}
+
+textarea:focus,
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="datetime"]:focus,
+input[type="datetime-local"]:focus,
+input[type="date"]:focus,
+input[type="month"]:focus,
+input[type="time"]:focus,
+input[type="week"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="search"]:focus,
+input[type="tel"]:focus,
+input[type="color"]:focus,
+.uneditable-input:focus {
+    border-color: #9E9E9E;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px #BDBDBD;
+    outline: 0 none;
+}
+
+/* split.js css */
+
+.api {
+    height: auto;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.example-4,
+.example-5 {
+    height: 400px;
+}
+
+.split p {
+    padding: 20px;
+}
+
+.split {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.gutter {
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-position: 50%;
+}
+
+.gutter.gutter-horizontal {
+    /* background-image: url('./images/vertical.png'); */
+    cursor: ew-resize;
+}
+
+.gutter.gutter-vertical {
+    /* background-image: url('./images/horizontal.png'); */
+    cursor: ns-resize;
+}
+
+.split.split-horizontal,
+.gutter.gutter-horizontal {
+    height: 100%;
+    float: left;
+}
+
+.vertical-button-panel {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 30px;
+    height: 700px;
+    display: inline-grid
+}
+
+.vertical-button-item {
+    width: 30px;
+    height: 100px;
+    display: inline-block;
+    color: #212121;
+    background-color: #EEEEEE;
+    cursor: pointer;
+}
+
+.vertical-button-item:hover,
+.vertical-button-item:active,
+.vertical-button-item:visited {
+    color: $primary-color !important;
+}
+
+.content-show {
+    visibility: visible;
+    display: block
+}
+
+.content-hide {
+    visibility: hidden;
+    display: none;
+}
+
+.floating-alert {
+    position: fixed;
+    top: 10px;
+    width: 30%;
+    left: 35%;
+    z-index: 1051;
+}
+
+.wrap-text {
+    word-wrap: break-word;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden !important;
+}
+
+.badge-required {
+    color: #dc3545;
+    background-color: #dc3545;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+    position: absolute;
+    margin-top: 6px;
+}
+
+.btn-sm-form-dependancy {
+    padding: .05rem .5rem;
+    font-size: .875rem;
+    border-radius: .2rem;
+}
+
+.bs-callout {
+    padding: 20px;
+    border: 1px solid;
+    border-left-width: 8px;
+    border-radius: 3px;
+}
+
+.bs-callout h6 {
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+
+.bs-callout p:last-child {
+    margin-bottom: 0;
+}
+
+.bs-callout code {
+    border-radius: 3px;
+}
+
+.bs-callout+.bs-callout {
+    margin-top: -5px;
+}
+
+.bs-callout-default {
+    border-color: #c6c8ca;
+}
+
+.bs-callout-default label {
+    color: #343a40;
+}
+
+.bs-callout-primary {
+    border-color: #428bca;
+}
+
+.bs-callout-primary label {
+    color: #428bca;
+}
+
+.bs-callout-success {
+    border-color: #5cb85c;
+    background-color: #f4fdf4;
+}
+
+.bs-callout-success label {
+    color: #343a40;
+}
+
+.bs-callout-danger {
+    border-color: #d9534f;
+}
+
+.bs-callout-danger label {
+    color: #d9534f;
+}
+
+.bs-callout-warning {
+    border-color: #f0ad4e;
+    background-color: #fffffa;
+}
+
+.bs-callout-warning label {
+    color: #343a40;
+}
+
+.bs-callout-info {
+    border-color: #5bc0de;
+    background-color: #fafafa;
+}
+
+.bs-callout-info label {
+    color: #212121;
+}
+
+//required checkbox 
+.customcheck {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+
+.customcheck input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+/* Create a custom checkbox */
+
+.checkmark {
+    position: absolute;
+    top: -3px;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+    border-radius: 5px;
+}
+
+/* On mouse-over, add a grey background color */
+
+.customcheck:hover input~.checkmark {
+    background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+
+.customcheck input:checked~.checkmark {
+    background-color: #007bff;
+    border-radius: 5px;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the checkmark when checked */
+
+.customcheck input:checked~.checkmark:after {
+    display: block;
+}
+
+/* Style the checkmark/indicator */
+
+.customcheck .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 7px;
+    height: 12px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+//required checkbox
+//START - header styles
+.slide-bar-span {
+    cursor: pointer;
+}
+
+.badge-notify {
+    position: relative;
+    top: -12px !important;
+    left: -3px !important;
+}
+
+.badge-span {
+    cursor: pointer
+}
+
+.vertical-line {
+    width: 1px;
+    border-left: 1px solid #999;
+    height: 30px;
+}
+
+.btn-circle {
+    width: 30px;
+    height: 30px;
+    padding: 6px 0px;
+    border-radius: 15px;
+    text-align: center;
+    font-size: 12px;
+    line-height: 1.42857;
+}
+
+.btn-circle.btn-xl {
+    width: 70px;
+    height: 70px;
+    padding: 10px 16px;
+    border-radius: 35px;
+    font-size: 24px;
+    line-height: 1.33;
+}
+
+.notification-custom {
+    width: 100%;
+    margin-left: -90px;
+    margin-top: 3px;
+    z-index: 1050;
+}
+
+.user-setting-custom {
+    width: 100%;
+    margin-left: -105px;
+    margin-top: 20px;
+    z-index: 1050;
+}
+
+.menu-custom {
+    width: 100%;
+    margin-left: -80px;
+    margin-top: 20px;
+    z-index: 1050;
+}
+
+.notification-custom>.popover-body {
+    height: 300px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.menu-custom>.popover-body {
+    height: 400px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.user-setting-custom.popover.bs-popover-bottom>.arrow {
+    margin-left: 97px !important;
+}
+
+.notification-custom.popover.bs-popover-bottom>.arrow {
+    margin-left: 74px !important;
+}
+
+.menu-custom.popover.bs-popover-bottom>.arrow {
+    margin-left: 74px !important;
+}
+
+.toggle-border-top {
+    border-top: 1px solid #dee2e6 !important;
+}
+
+.content-show-noti {
+    visibility: visible;
+    display: inline block;
+}
+
+.notification-btn {
+    color: #343a40;
+    background-color: transparent
+}
+
+.user-settings-item {
+    cursor: pointer;
+    color: #212121 !important;
+}
+
+.user-settings-item:hover,
+.user-settings-item:active,
+.user-settings-item:visited {
+    color: #FAFAFA !important;
+    background-color: #212121 !important;
+}
+
+.menu-content-span {
+    text-align: center;
+}
+
+.menu-content-item P {
+    font-size: 0.65rem;
+    color: #757575;
+    font-weight: 600;
+}
+
+.menu-content-item {
+    text-align: center;
+    cursor: pointer;
+}
+
+
+.menu-content-item:hover,
+.menu-content-item:active,
+.menu-content-item:visited {
+    color: #ffc107 !important; 
+    background-color: #EEEEEE !important;
+}
+//END - header styles
+
+//START - panel
+.box-shadow {
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+.main-panel {
+    padding-top: 54px;
+    height: 100%;
+}
+
+.panel {
+    margin-bottom: 20px;
+    background-color: #fff;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+}
+
+.panel-default {
+    border-color: #ddd;
+}
+
+.panel-default>.panel-heading {
+    color: #333;
+    background-color: #EEEEEE;
+}
+
+.panel-heading {
+    padding: 10px 15px;
+    border-bottom: 1px solid transparent;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+
+.panel-body {
+    padding: 15px;
+}
+
+.panel-header-border-bottom {
+    border-bottom: 1px solid #dee2e6 !important;
+}
+// END - panel
+
+/* START- content hide/show - used in charts in widgets */
+.content-show {
+    visibility: visible;
+    display: block
+}
+
+.content-hide {
+    visibility: hidden;
+    display: none;
+}
+
+/* END- content hide/show - used in charts in widgets */
+
+input:required {
+    box-shadow: none;
+}
+
+
+//reusable button styles
+.reusable_btn {
+    line-height: 0.8;
+}
+
+//menu tabs popover styles
+.menu-tabs {
+    width: 100%;
+    margin-left: -100px;
+    margin-top: 20px;
+    z-index: 1050;
+}
+
+.menu-tabs>.popover-body {
+    height: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.menu-tabs.popover.bs-popover-bottom>.arrow {
+    margin-left: 91px !important;
+}
