@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { WsCallback } from '../util/ws-callback';
-import { WsType } from '../util/ws-type';
-import { ServiceUtil } from '../util/service-util';
-import { WsResponse } from '../util/ws-response.model';
+import { WsCallback } from '../services/util/ws-callback';
+import { WsType } from '../services/util/ws-type';
+import { ServiceUtil } from '../services/util/service-util';
+import { WsResponse } from '../services/util/ws-response.model';
 
 @Injectable({
     providedIn: 'root'

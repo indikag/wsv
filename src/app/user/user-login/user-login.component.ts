@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { WsCallback } from 'src/app/util/ws-callback';
-import { WsType } from 'src/app/util/ws-type';
-import { WsResponse } from 'src/app/util/ws-response.model';
+import { WsCallback } from 'src/app/services/util/ws-callback';
+import { WsType } from 'src/app/services/util/ws-type';
+import { WsResponse } from 'src/app/services/util/ws-response.model';
 import { UserServiceService } from '../user-service.service';
 
 @Component({
