@@ -8,4 +8,8 @@ export class ServiceUtil {
     public static getLoginUrl(): string {
         return ServiceUtil.servicePrefix + 'user/login';
     }
+
+    public static getUserByUserId(userId: string) {
+        return ServiceUtil.servicePrefix + 'user/get?id=' + userId;
+    }
 }
