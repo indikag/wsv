@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { WsCallback } from 'src/app/services/util/ws-callback';
 import { WsType } from 'src/app/services/util/ws-type';
 import { WsResponse } from 'src/app/services/util/ws-response.model';
-import { UserServiceService } from '../user-service.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-user-login',
@@ -13,7 +13,7 @@ export class UserLoginComponent implements OnInit, WsCallback {
   public userName: string;
   public password: string;
 
-  constructor(private userService: UserServiceService) { }
+  constructor(private userService: UserService) { }
 
   ngOnInit() {
   }
