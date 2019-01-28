@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import "~bootstrap/dist/css/bootstrap.min.css";
+@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
 
 $primary-color-acent: #7B1FA2;
 $primary-color: #6A1B9A;
@@ -602,4 +603,13 @@ input:required {
 
 .menu-tabs.popover.bs-popover-bottom>.arrow {
     margin-left: 91px !important;
+}
+
+//nav bar
+.purple-nav-bar {
+    background-color: $primary-color
+}
+
+.purple-nav-bar p {
+    color: #fafafa;
 }

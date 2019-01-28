@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
@@ -12,24 +12,32 @@ import { NgxBootstrapMModule } from './ngx-bootstrap-m/ngx-bootstrap-m.module';
 import { UserLoginComponent } from './user/user-login/user-login.component';
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
+import { HomeComponent } from './home/home.component'
+
+
+import { TabsModule } from 'ngx-bootstrap/tabs';
+import { AlertModule } from 'ngx-bootstrap';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     ServicelistComponent,
-    UserLoginComponent
+    UserLoginComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppMaterialModule,
-    NgxBootstrapMModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    TabsModule.forRoot(),
+    AlertModule.forRoot()
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+
 })
 export class AppModule { }
