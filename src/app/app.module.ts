@@ -17,6 +17,7 @@ import { HomeComponent } from './home/home.component'
 
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { AlertModule } from 'ngx-bootstrap';
+import { EditServicesComponent } from './edit-services/edit-services.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { AlertModule } from 'ngx-bootstrap';
     HeaderComponent,
     ServicelistComponent,
     UserLoginComponent,
-    HomeComponent
+    HomeComponent,
+    EditServicesComponent
   ],
   imports: [
     BrowserModule,
