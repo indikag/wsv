@@ -12,13 +12,15 @@ import { NgxBootstrapMModule } from './ngx-bootstrap-m/ngx-bootstrap-m.module';
 import { UserLoginComponent } from './user/user-login/user-login.component';
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
+import { EditServicesComponent } from './edit-services/edit-services.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     ServicelistComponent,
-    UserLoginComponent
+    UserLoginComponent,
+    EditServicesComponent
   ],
   imports: [
     BrowserModule,
