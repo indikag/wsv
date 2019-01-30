@@ -3,8 +3,9 @@
 @import "~bootstrap/dist/css/bootstrap.min.css";
 @import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
 
-$primary-color-acent: #7B1FA2;
+$primary-color-acent: #ba68c8;
 $primary-color: #6A1B9A;
+$purple-bg-color: #EDE7F6;
 
 html,
 body {
@@ -16,7 +17,7 @@ body {
 }
 
 body {
-    background-color: #EDE7F6;
+    background-color: #FAFAFA;
     font-size: 14px;
 }
 
@@ -613,3 +614,60 @@ input:required {
 .purple-nav-bar p {
     color: #fafafa;
 }
+
+
+.purple_active{
+    color: #FAFAFA !important;
+    background-color: $primary-color !important;
+}
+
+.purple-card {
+    background-color: $purple-bg-color !important;
+
+}
+
+.purple-card-header {
+    color: #263238 !important;
+    font-weight: 600 !important;
+    font-size: 1rem !important;
+}
+
+.purple-card-link {
+    color: $primary-color !important;
+    font-weight: 400 !important;
+    cursor: pointer !important;
+}
+
+.purple-card-link:hover,
+.purple-card-link:active,
+.purple-card-link:visited {
+    text-decoration: underline !important;
+    color: $primary-color !important;
+    font-weight: 500 !important;
+}
+
+.badge-published {
+    background-color: $primary-color !important;
+    color: #fafafa !important;
+}
+
+.badge-unpublished {
+    background-color: #fafafa !important;
+    color: $primary-color !important;
+}
+
+.btn-outline-purple {
+    background-color: $purple-bg-color !important;
+    color: $primary-color !important;
+    cursor: pointer;
+    border-color: $primary-color !important;
+}
+
+.btn-outline-purple:hover,
+.btn-outline-purple:active,
+.btn-outline-purple:visited {
+    background-color: $primary-color !important;
+    color: $purple-bg-color !important;
+    border-color: $primary-color !important;
+}
+

@@ -1,6 +1,154 @@
 <div class="container-fluid my-2">
 	<tabset type="pills">
-		<tab heading="Pills 1">Pills content 1</tab>
-		<tab heading="Pills 2">Pills content 2</tab>
+		<tab [customClass]="purple_active" heading="All Services">
+			<!-- all services container -->
+			<div class="container-fluid px-0 my-2">
+				<div class="card my-2 purple-card">
+					<div class="card-body py-2 row">
+						<div class="col-sm-8">
+							<p class="purple-card-header my-1">
+								<span class="badge badge-published mr-2">Published</span>
+								Web Service Name
+							</p>
+							<a class="purple-card-link my-1">https://www.serviceaccess.url/servicename</a>
+						</div>
+						<div class="col-sm-4">
+							<button type="button" class="btn btn-outline-purple btn-sm m-1 float-right">
+								<i class="fal fa-unlink fa-lg"></i>
+							</button>
+							<button type="button" class="btn btn-outline-purple btn-sm m-1 float-right">
+								<i class="fal fa-file-alt fa-lg"></i>
+							</button>
+						</div>
+					</div>
+				</div>
+				<div class="card my-2 purple-card">
+					<div class="card-body py-2 row">
+						<div class="col-sm-8">
+							<p class="purple-card-header my-1">
+								<span class="badge badge-unpublished mr-2">Unublished</span>
+								Web Service Name
+							</p>
+							<a class="purple-card-link my-1">https://www.serviceaccess.url/servicename</a>
+						</div>
+						<div class="col-sm-4">
+							<button type="button" class="btn btn-outline-purple btn-sm m-1 float-right">
+								<i class="fal fa-file-alt fa-lg"></i>
+							</button>
+							<button type="button" class="btn btn-outline-purple btn-sm m-1 float-right">
+								<i class="fal fa-file-edit fa-lg"></i>
+							</button>
+							<button type="button" class="btn btn-outline-purple btn-sm m-1 float-right">
+								<i class="fal fa-trash-alt fa-lg"></i>
+							</button>
+							<button type="button" class="btn btn-outline-purple btn-sm m-1 float-right">
+								<i class="fal fa-link fa-lg"></i>
+							</button>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</tab>
+		<tab heading="Published Services">
+			<!-- publish services container -->
+			<div class="container-fluid px-0 my-2">
+				<div class="card my-2 purple-card">
+					<div class="card-body py-2 row">
+						<div class="col-sm-8">
+							<p class="purple-card-header my-1">
+								<span class="badge badge-published mr-2">Published</span>
+								Web Service Name
+							</p>
+							<a class="purple-card-link my-1">https://www.serviceaccess.url/servicename</a>
+						</div>
+						<div class="col-sm-4">
+							<button type="button" class="btn btn-outline-purple btn-sm m-1 float-right">
+								<i class="fal fa-unlink fa-lg"></i>
+							</button>
+							<button type="button" class="btn btn-outline-purple btn-sm m-1 float-right">
+								<i class="fal fa-file-alt fa-lg"></i>
+							</button>
+						</div>
+					</div>
+				</div>
+				<div class="card my-2 purple-card">
+					<div class="card-body py-2 row">
+						<div class="col-sm-8">
+							<p class="purple-card-header my-1">
+								<span class="badge badge-published mr-2">Published</span>
+								Web Service Name
+							</p>
+							<a class="purple-card-link my-1">https://www.serviceaccess.url/servicename</a>
+						</div>
+						<div class="col-sm-4">
+							<button type="button" class="btn btn-outline-purple btn-sm m-1 float-right">
+								<i class="fal fa-unlink fa-lg"></i>
+							</button>
+							<button type="button" class="btn btn-outline-purple btn-sm m-1 float-right">
+								<i class="fal fa-file-alt fa-lg"></i>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</tab>
+		<tab heading="Unpublished Services">
+			<!-- unpublish services container -->
+			<div class="container-fluid px-0 my-2">
+				<div class="card my-2 purple-card">
+					<div class="card-body py-2 row">
+						<div class="col-sm-8">
+							<p class="purple-card-header my-1">
+								<span class="badge badge-unpublished mr-2">Unublished</span>
+								Web Service Name
+							</p>
+							<a class="purple-card-link my-1">https://www.serviceaccess.url/servicename</a>
+						</div>
+						<div class="col-sm-4">
+							<button type="button" class="btn btn-outline-purple btn-sm m-1 float-right">
+								<i class="fal fa-file-alt fa-lg"></i>
+							</button>
+							<button type="button" class="btn btn-outline-purple btn-sm m-1 float-right">
+								<i class="fal fa-file-edit fa-lg"></i>
+							</button>
+							<button type="button" class="btn btn-outline-purple btn-sm m-1 float-right">
+								<i class="fal fa-trash-alt fa-lg"></i>
+							</button>
+							<button type="button" class="btn btn-outline-purple btn-sm m-1 float-right">
+								<i class="fal fa-link fa-lg"></i>
+							</button>
+
+						</div>
+					</div>
+				</div>
+				<div class="card my-2 purple-card">
+					<div class="card-body py-2 row">
+						<div class="col-sm-8">
+							<p class="purple-card-header my-1">
+								<span class="badge badge-unpublished mr-2">Unublished</span>
+								Web Service Name
+							</p>
+							<a class="purple-card-link my-1">https://www.serviceaccess.url/servicename</a>
+						</div>
+						<div class="col-sm-4">
+							<button type="button" class="btn btn-outline-purple btn-sm m-1 float-right">
+								<i class="fal fa-file-alt fa-lg"></i>
+							</button>
+							<button type="button" class="btn btn-outline-purple btn-sm m-1 float-right">
+								<i class="fal fa-file-edit fa-lg"></i>
+							</button>
+							<button type="button" class="btn btn-outline-purple btn-sm m-1 float-right">
+								<i class="fal fa-trash-alt fa-lg"></i>
+							</button>
+							<button type="button" class="btn btn-outline-purple btn-sm m-1 float-right">
+								<i class="fal fa-link fa-lg"></i>
+							</button>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</tab>
 	</tabset>
 </div>

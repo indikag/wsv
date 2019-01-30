@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { WsCallback } from './src/app/util/ws-callback';
-import { WsType } from './src/app/util/ws-type';
-import { WsResponse } from './src/app/util/ws-response.model';
-import { UserServiceService } from '../user-service.service';
+import { WsCallback } from '../../services/util/ws-callback';
+import { WsType } from '../../services/util/ws-type';
+import { WsResponse } from '../../services/util/ws-response.model';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 
@@ -12,10 +11,13 @@ import { UserService } from 'src/app/services/user.service';
 	styleUrls: ['./user-login.component.css']
 })
 export class UserLoginComponent implements OnInit, WsCallback {
+
 	public userName: string;
 	public password: string;
 
-	constructor(private userService: UserServiceService, private router: Router) { }
+	public showPassword: boolean = false
+
+	constructor(private userService: UserService, private router: Router) { }
 
 	public clickOnSignInButton() {
 		console.log('click on the save button, uname=' + this.userName + ' pass=' + this.password);

@@ -4,7 +4,7 @@
 
 .my-login-page .card-wrapper {
     width: 400px;
-    margin: 20% auto;
+    margin: 12% auto;
 }
 
 .my-login-page .card {
@@ -49,7 +49,7 @@
 @media screen and (max-width: 425px) {
     .my-login-page .card-wrapper {
         width: 90%;
-        margin: 20% auto;
+        margin: 12% auto;
     }
 }
 
