@@ -14,8 +14,8 @@ import { AppRoutingModule } from './app-routing/app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './home/home.component'
 
-
 import { TabsModule } from 'ngx-bootstrap/tabs';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { AlertModule } from 'ngx-bootstrap';
 import { EditServicesComponent } from './edit-services/edit-services.component';
 
@@ -36,7 +36,8 @@ import { EditServicesComponent } from './edit-services/edit-services.component';
     FormsModule,
     HttpClientModule,
     TabsModule.forRoot(),
-    AlertModule.forRoot()
+    AlertModule.forRoot(),
+    TooltipModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent],
