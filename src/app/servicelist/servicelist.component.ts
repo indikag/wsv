@@ -20,6 +20,7 @@ export class ServicelistComponent implements OnInit, WsCallback {
 	public constants = Constants;
 	private userId;
 	private userGroupList: any = [];
+	private userServiceList: any = [];
 
 	constructor(private servicesService: UserServicesService, private userService: UserService,
 		 private router: Router, private groupService: UserGroupService) {
@@ -31,6 +32,16 @@ export class ServicelistComponent implements OnInit, WsCallback {
 		this.groupService.getUserGroups(this.userId, this);
 	}
 
+	public filter(itemList: any[], published: boolean): any[] {
+		const result: any[] = [];
+		itemList.forEach(item => {
+		  if (item.published === published) {
+			  result[result.length] = item;
+		  }
+		});
+		return result;
+	  }
+
 	onSuccess(data: WsResponse, serviceType: WsType) {
 		if (serviceType === WsType.GET_SERVICES_BY_USER_ID) {
 			console.log(data);
@@ -39,6 +50,13 @@ export class ServicelistComponent implements OnInit, WsCallback {
 		} else if (serviceType === WsType.GET_GROUPS_BY_USER_ID) {
 			this.userGroupList = data.payload;
 			console.log(this.userGroupList.length);
+			this.userGroupList.forEach(group => {
+				this.servicesService.getServicesByGroupId(group.groupId, this);
+			});
+		} else if (serviceType === WsType.GET_SERVICES_BY_GROUP_ID) {
+			data.payload.forEach(item => {
+				this.userServiceList[this.userServiceList.length] = item;
+			});
 		}
 	}
 	onFail(data: WsResponse, serviceType: WsType) {
@@ -48,16 +66,28 @@ export class ServicelistComponent implements OnInit, WsCallback {
 			console.log(data.statusDescription);
 		} else if (serviceType === WsType.GET_GROUPS_BY_USER_ID) {
 			console.log(data.statusDescription);
+		} else if (serviceType === WsType.GET_SERVICES_BY_GROUP_ID) {
+			console.log(data.statusDescription);
 		}
 	}
 
-	public loadLogsPage() {
+	public loadLogsPage(serviceid: any) {
 		this.router.navigateByUrl('logs');
 	}
 
-	public loadEditPage() {
+	public loadEditPage(serviceid: any) {
 		this.router.navigateByUrl('service');
 	}
 
+	public publishService(serviceid: any) {
+		console.log('PUBLISH serviceId = ' + serviceid);
+	}
 
+	public unpublishService(serviceid: any) {
+		console.log('UNPUBLISH serviceId = ' + serviceid);
+	}
+
+	public deleteService(serviceid: any) {
+		console.log('DELETE serviceId = ' + serviceid);
+	}
 }

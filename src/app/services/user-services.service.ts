@@ -41,4 +41,39 @@ export class UserServicesService {
         }
     );
 }
+
+/**
+ * Gets services by group id
+ * @param groupId id of the user group
+ * @param callBack  callback class
+ */
+public getServicesByGroupId(groupId: string, callBack: WsCallback) {
+    this.http.get(ServiceUtil.getServicesByGroupId(groupId)).subscribe(
+        data => {
+            const modified = JSON.parse(JSON.stringify(data));
+            const res = new WsResponse(
+                modified.status.description,
+                modified.status.code,
+                modified.status.name,
+                modified.payload);
+            callBack.onSuccess(res, WsType.GET_SERVICES_BY_GROUP_ID);
+        },
+        error => {
+            if (error.status !== '') {
+                const val = (error as HttpErrorResponse).error;
+                const modified = JSON.parse(JSON.stringify(val));
+                const res: WsResponse = new WsResponse(
+                    modified.status.description,
+                    modified.status.code,
+                    modified.status.name,
+                    modified.payload);
+                callBack.onFail(res, WsType.GET_SERVICES_BY_GROUP_ID);
+            } else {
+                // browser related issues
+                const res = new WsResponse('Unknown error happened');
+                callBack.onFail(res, WsType.GET_SERVICES_BY_GROUP_ID);
+            }
+        }
+    );
+    }
 }
