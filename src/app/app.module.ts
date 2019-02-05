@@ -18,6 +18,8 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { AlertModule } from 'ngx-bootstrap';
 import { EditServicesComponent } from './edit-services/edit-services.component';
+import { ServiceDefineComponent } from './service-define/service-define.component';
+import { ServiceLogComponent } from './service-log/service-log.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { EditServicesComponent } from './edit-services/edit-services.component';
     ServicelistComponent,
     UserLoginComponent,
     HomeComponent,
-    EditServicesComponent
+    EditServicesComponent,
+    ServiceDefineComponent,
+    ServiceLogComponent
   ],
   imports: [
     BrowserModule,

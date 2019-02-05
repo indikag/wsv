@@ -4,6 +4,7 @@ import { WsType } from '../../services/util/ws-type';
 import { WsResponse } from '../../services/util/ws-response.model';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
+import { Constants } from 'src/app/util/constants';
 
 @Component({
 	selector: 'app-user-login',
@@ -15,25 +16,29 @@ export class UserLoginComponent implements OnInit, WsCallback {
 	public userName: string;
 	public password: string;
 
-	public showPassword: boolean = false
+	public showPassword: boolean = false;
 
 	constructor(private userService: UserService, private router: Router) { }
 
 	public clickOnSignInButton() {
 		console.log('click on the save button, uname=' + this.userName + ' pass=' + this.password);
-		// const request = { userName: this.userName, password: this.password };
-		// console.log(request);
-		// this.userService.login(request, this);
-		this.router.navigateByUrl('home');
+		 const request = { userName: this.userName, password: this.password };
+		 this.userService.login(request, this);
+		// this.router.navigateByUrl('home');
 	}
 
 	onSuccess(data: WsResponse, serviceType: WsType) {
 		console.log('success ' + data);
-		// this.router.navigateByUrl('home');
+		if (serviceType === WsType.LOGIN) {
+			localStorage.setItem(Constants.WSV_USER, data.payload);
+			this.router.navigateByUrl('home');
+		}
 	}
 
 	onFail(data: WsResponse, serviceType: WsType) {
-		console.log('error');
+		if (serviceType === WsType.LOGIN) {
+			console.log(data.statusDescription);
+		}
 	}
 
 	ngOnInit() {

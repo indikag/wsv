@@ -12,4 +12,12 @@ export class ServiceUtil {
     public static getUserByUserId(userId: string) {
         return ServiceUtil.servicePrefix + 'user/get?id=' + userId;
     }
+
+    public static getServicesByUserId(userId: string) {
+        return ServiceUtil.servicePrefix + 'service/get?id=' + userId;
+    }
+
+    public static getGroupsByUserId(userId: string) {
+        return ServiceUtil.servicePrefix + 'group/get?id=' + userId;
+    }
 }
