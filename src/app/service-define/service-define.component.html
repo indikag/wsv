@@ -6,14 +6,36 @@
 		<div class="d-inline-block align-top vertical-line ml-1 mr-1"></div>
 	</div>
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-	 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" (click)="showToggleMenu()">
+		aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+		(click)="showToggleMenu()">
 		<i class="fa fa-ellipsis-v"></i>
 	</button>
 	<div class="collapse navbar-collapse" id="navbarSupportedContent" [ngClass]="{'toggle-border-top': isToggleMenu}">
 		<ul class="navbar-nav mr-auto">
 		</ul>
 		<div class="form-inline my-2 my-lg-0 float-right">
-			
+
 		</div>
 	</div>
+</div>
+<div class="container">
+	<!--Service Name-->
+	<div class="input-group mb-3">
+		<div class="input-group-prepend">
+			<span class="input-group-text">Service Name</span>
+		</div>
+		<input type="text" class="form-control" aria-label="Amount (to the nearest dollar)" [(ngModel)]="serviceModel.serviceName">
+	</div>
+
+	<!--service description-->
+	<div class="input-group">
+		<div class="input-group-prepend">
+			<span class="input-group-text">Service Description</span>
+		</div>
+		<textarea class="form-control" aria-label="Service Description" [(ngModel)]="serviceModel._serviceDescription"></textarea>
+	</div>
+
+
+	<!--Save Button-->
+	<button type="button" class="btn btn-primary" (click)="onSaveButtonClick()">Save</button>
 </div>

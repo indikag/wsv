@@ -14,6 +14,7 @@ const routes: Routes = [
 	{ path: 'edit', component: EditServicesComponent, data: { allowed: false } },
 	{ path: 'logs', component: ServiceLogComponent, data: { allowed: false } },
 	{ path: 'service', component: ServiceDefineComponent, data: { allowed: false } },
+	{ path: 'add', component: ServiceDefineComponent, data: { allowed: false } }
 ]
 
 @NgModule({
