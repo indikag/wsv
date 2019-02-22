@@ -4,6 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { AppMaterialModule } from './app-material/app-material.module';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -20,6 +21,8 @@ import { AlertModule } from 'ngx-bootstrap';
 import { EditServicesComponent } from './edit-services/edit-services.component';
 import { ServiceDefineComponent } from './service-define/service-define.component';
 import { ServiceLogComponent } from './service-log/service-log.component';
+import { ComplexFormatComponent } from './service-define/form-templates/complex-format/complex-format.component';
+import { SimpleFormatComponent } from './service-define/form-templates/simple-format/simple-format.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +33,9 @@ import { ServiceLogComponent } from './service-log/service-log.component';
     HomeComponent,
     EditServicesComponent,
     ServiceDefineComponent,
-    ServiceLogComponent
+    ServiceLogComponent,
+    ComplexFormatComponent,
+    SimpleFormatComponent
   ],
   imports: [
     BrowserModule,
@@ -41,7 +46,8 @@ import { ServiceLogComponent } from './service-log/service-log.component';
     HttpClientModule,
     TabsModule.forRoot(),
     AlertModule.forRoot(),
-    TooltipModule.forRoot()
+    TooltipModule.forRoot(),
+    ModalModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent],
