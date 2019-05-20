@@ -1,0 +1,109 @@
+<!--Header-->
+<div class="navbar navbar-light purple-nav-bar">
+	<div class="navbar-brand">
+		<!-- <img src="../../assets/images/mainimage.png" width="auto" height="30" class="d-inline-block align-top ml-1 mr-1" alt=""> -->
+		<!-- <i class="fab fa-nintendo-switch"></i> -->
+		<p class="d-inline-block align-top ml-1 mr-1 h4">Service App</p>
+		<div class="d-inline-block align-top vertical-line ml-1 mr-1"></div>
+	</div>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+		aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+		(click)="showToggleMenu()">
+		<i class="fa fa-ellipsis-v"></i>
+	</button>
+	<div class="collapse navbar-collapse" id="navbarSupportedContent" [ngClass]="{'toggle-border-top': isToggleMenu}">
+		<ul class="navbar-nav mr-auto">
+		</ul>
+		<div class="form-inline my-2 my-lg-0 float-right">
+
+		</div>
+	</div>
+</div>
+
+<!--Body-->
+<aw-wizard>
+	<!--Service Name and Description-->
+	<aw-wizard-step stepTitle="Add Service Information">
+		<div class="card">
+			<div class="card-header">
+				Service
+			</div>
+			<div class="card-body">
+				<!--Service Name-->
+				<div class="input-group mb-3">
+					<div class="input-group-prepend">
+						<span class="input-group-text">Service Name</span>
+					</div>
+					<input type="text" class="form-control" aria-label="Amount (to the nearest dollar)"
+						[(ngModel)]="serviceModel.serviceName">
+				</div>
+
+				<!--service description-->
+				<div class="input-group">
+					<div class="input-group-prepend">
+						<span class="input-group-text">Service Description</span>
+					</div>
+					<textarea class="form-control" aria-label="Service Description"
+						[(ngModel)]="serviceModel.serviceDescription"></textarea>
+				</div>
+				<!--Add method button-->
+				<!--<button class="btn btn-primary" (click)="addMethod(template)">Add Method</button>-->
+			</div>
+		</div>
+
+		<button type="button" awNextStep (click)="addMethod(template)">Next</button>
+		<button type="button" [awGoToStep]="{stepIndex: 2}">Go directly to third Step</button>
+	</aw-wizard-step>
+
+	<!--Adding Methods-->
+	<aw-wizard-step stepTitle="Add Methods" awOptionalStep>
+		<!--Method List-->
+		<div class="card" *ngIf="serviceMethods.length > 0">
+			<div class="card-header">Methods</div>
+			<div class="card-body">
+				<div class="container row">
+					<div *ngFor="let serviceMethod of serviceMethods">
+						<div class="card" style="width: 18rem;">
+							<div class="card-body">
+								<h5 class="card-title">{{serviceMethod.methodName}}</h5>
+								<p class="card-text">{{serviceMethod.type}}</p>
+								<button type="button" class="btn btn-primary" (click)="addParameter()">Add
+									Parameters</button>
+								<button type="button" class="btn btn-primary" (click)="addResponse()"
+									*ngIf="currentResponse == undefined">Add Response</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<button type="button" awPreviousStep>Go to previous step</button>
+		<button type="button" awNextStep>Go to next step</button>
+	</aw-wizard-step>
+
+
+	<aw-wizard-step stepTitle="Title of step 3">
+		Content of Step 3
+		<button type="button" awPreviousStep>Previous Step</button>
+		<button type="button" (click)="finishFunction()">Finish</button>
+	</aw-wizard-step>
+
+	<aw-wizard-step stepTitle="Title of step 3">
+		Content of Step 3
+		<button type="button" awPreviousStep>Previous Step</button>
+		<button type="button" (click)="finishFunction()">Finish</button>
+	</aw-wizard-step>
+
+	<aw-wizard-step stepTitle="Title of step 3">
+		Content of Step 3
+		<button type="button" awPreviousStep>Previous Step</button>
+		<button type="button" (click)="finishFunction()">Finish</button>
+	</aw-wizard-step>
+
+	<aw-wizard-step stepTitle="Title of step 3">
+		Content of Step 3
+		<button type="button" awPreviousStep>Previous Step</button>
+		<button type="button" (click)="finishFunction()">Finish</button>
+	</aw-wizard-step>
+</aw-wizard>

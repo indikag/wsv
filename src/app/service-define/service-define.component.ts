@@ -2,9 +2,13 @@ import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { ServiceModel } from './service-model-class/service-model.model';
 import { Parameter } from './service-model-class/parameter.model';
 import { ServiceMethods } from './service-model-class/service-methods.model';
-import { BsModalService, BsModalRef, ModalDirective } from 'ngx-bootstrap';
+import { BsModalService, BsModalRef, ModalDirective, TabDirective } from 'ngx-bootstrap';
 import { Response } from './service-model-class/response.model';
 import { SimpleDataFormat } from './service-model-class/simple-data-format.model';
+import { ComplexDataFormat } from './service-model-class/complex-data-format.model';
+import { Format } from './service-model-class/format.model';
+import { Router, NavigationExtras } from '@angular/router';
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-service-define',
@@ -15,6 +19,10 @@ export class ServiceDefineComponent implements OnInit {
   @ViewChild('methodModal') childModal: ModalDirective;
   @ViewChild('parameterModal') parameterModal: ModalDirective;
   @ViewChild('responseModal') responseModal: ModalDirective;
+  @ViewChild('formatModal') formatModal: ModalDirective;
+
+  @ViewChild('simpleFormatModal') simpleFormatModal: ModalDirective;
+  @ViewChild('complexFormatModal') complexFormatModal: ModalDirective;
 
   // Parent service model
   public serviceModel: ServiceModel = new ServiceModel();
@@ -30,20 +38,34 @@ export class ServiceDefineComponent implements OnInit {
   public currentResponse: Response;
   // simple format model
   public currentSimpleFormat: SimpleDataFormat = new SimpleDataFormat();
+  // complex data format
+  public currentComplexFormat: ComplexDataFormat = new ComplexDataFormat();
+  // current format model
+  public currentFormat: Format;
+  // current format model list
+  public currentFormatList: Format[] = [];
 
+  public currentComplexDataFormat: ComplexDataFormat;
+  public currentSimpleDataFormat: SimpleDataFormat;
 
   // Common variables for the class
   private modalRef: BsModalRef;
 
-  constructor(private modalService: BsModalService) {
+
+  // utility variables
+  public isRandom = true;
+
+
+  constructor(private modalService: BsModalService, private router: Router, private dataService: DataService) {
     // Assigning initial empty method list
     this.serviceModel.serviceMethods = this.serviceMethods;
   }
 
   ngOnInit() {
-     this.setInitialValues();
+    // this.setInitialValues();
   }
 
+  // for testing purposes (initial data loading part)
   setInitialValues() {
     const service = new ServiceModel();
     service.serviceName = 'User Profile Service';
@@ -69,7 +91,7 @@ export class ServiceDefineComponent implements OnInit {
     res.maxSize = 3;
     res.minSize = 1;
     res.name = 'Profile';
-    res.responseType = 'String';
+    res.responseType = 'Modal';
     method1.response = res;
 
     this.serviceModel = service;
@@ -80,9 +102,18 @@ export class ServiceDefineComponent implements OnInit {
     this.currentResponse = res;
   }
 
-  onSaveButtonClick() {
-    const newLocal = JSON.stringify(this.serviceModel);
-    console.log(newLocal);
+  // Show edit method page
+  public editMethod() {
+    // const data: NavigationExtras = {selectedMethod: this.currentMethod};
+    // this.router.navigate(['method'], {state: data);
+    /*const navigationExtras: NavigationExtras = {
+      queryParams: {
+        selectedMethod: this.currentMethod
+      }
+    };*/
+    this.dataService.setServiceModel(this.serviceModel);
+    this.dataService.setSelectedMethod(this.currentMethod);
+    this.router.navigateByUrl('method');
   }
 
   public addMethod(template: TemplateRef<any>) {
@@ -95,42 +126,4 @@ export class ServiceDefineComponent implements OnInit {
     // this.currentMethod = null;
     this.childModal.hide();
   }
-
-  // Parameters
-  addParameter() {
-    this.currentMethod.parameters = this.parameterList;
-    this.parameterModal.show();
-  }
-
-  doAddParameter() {
-    this.parameterList.push(this.currentParameter);
-    // this.currentParameter = new Parameter();
-    this.parameterModal.hide();
-  }
-
-  // Response
-  addResponse() {
-    this.currentResponse = new Response();
-    this.currentMethod.response = this.currentResponse;
-    this.responseModal.show();
-  }
-
-  doAddResponse() {
-    // this.currentResponse = null;
-    this.responseModal.hide();
-  }
-
-  deleteResponse() {
-    this.currentMethod.response = null;
-    this.currentResponse = null;
-  }
-
-  changeResponseType(param: any) {
-    console.log(param.target.value);
-  }
-
-  doAddResponseAttributes() {
-    // adding attributes
-  }
-
 }

@@ -1,0 +1,349 @@
+<div class="navbar navbar-light purple-nav-bar">
+	<div class="navbar-brand">
+		<!-- <img src="../../assets/images/mainimage.png" width="auto" height="30" class="d-inline-block align-top ml-1 mr-1" alt=""> -->
+		<!-- <i class="fab fa-nintendo-switch"></i> -->
+		<p class="d-inline-block align-top ml-1 mr-1 h4">Service App</p>
+		<div class="d-inline-block align-top vertical-line ml-1 mr-1"></div>
+	</div>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+		aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+		(click)="showToggleMenu()">
+		<i class="fa fa-ellipsis-v"></i>
+	</button>
+	<div class="collapse navbar-collapse" id="navbarSupportedContent" [ngClass]="{'toggle-border-top': isToggleMenu}">
+		<ul class="navbar-nav mr-auto">
+		</ul>
+		<div class="form-inline my-2 my-lg-0 float-right">
+
+		</div>
+	</div>
+</div>
+
+<!--Body-->
+<div class="container">
+	<div>
+		<button type="button" class="btn btn-primary" (click)="addParameter()">Add Parameters</button>
+		<button type="button" class="btn btn-primary" (click)="addResponse()" *ngIf="currentResponse == undefined">Add
+			Response</button>
+	</div>
+
+	<!--Parameter List-->
+	<div class="card" *ngIf="parameterList.length > 0">
+		<div class="card-header">Parameters</div>
+		<div class="card-body">
+			<div class="container row">
+				<div *ngFor="let parameter of parameterList">
+					<div class="card" style="width: 18rem;">
+						<div class="card-body">
+							<h5 class="card-title">{{parameter.parameterName}}</h5>
+							<p class="card-text">{{parameter.parameterValue}}</p>
+							<p class="card-text">{{parameter.parameterType}}</p>
+							<button type="button" class="btn btn-primary">Edit</button>
+							<button type="button" class="btn btn-primary">Delete</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--Response-->
+	<div class="card" *ngIf="currentResponse != null || currentResponse != undefined">
+		<div class="card-header">Response</div>
+		<div class="card-body">
+			<div class="card" style="width: 18rem;">
+				<div class="card-body">
+					<h5 class="card-title">{{currentResponse.name}}</h5>
+					<p class="card-text">{{currentResponse.maxSize}}</p>
+					<p class="card-text">{{currentResponse.responseType}}</p>
+					<button type="button" class="btn btn-primary">Edit</button>
+					<button type="button" class="btn btn-primary" (click)="deleteResponse()">Delete</button>
+					<button type="button" class="btn btn-primary" (click)="addAttribute()">+ Attribute</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--Attributes of the selected response-->
+	<div class="card" *ngIf="currentFormatList != null || currentFormatList != undefined">
+		<div class="card-header">Formats</div>
+		<div class="card-body">
+			<div class="container row">
+				<div *ngFor="let format of currentFormatList">
+					<div class="card" style="width: 18rem;">
+						<div class="card-body">
+							<h5 class="card-title">{{format.name}}</h5>
+							<p class="card-text">{{format.type}}</p>
+
+							<button type="button" class="btn btn-primary" *ngIf="format.complexDataFormat != null"
+								(click)="addComplexModel()">+Model</button>
+							<button type="button" class="btn btn-primary" *ngIf="format.simpleDataFormat != null"
+								(click)="addSimpleModel(format)">+Value Type</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--Save Button (Must be the bottom)-->
+	<button type="button" class="btn btn-primary" (click)="onSaveButtonClick()">Save</button>
+</div>
+
+
+<!--
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////MODALS////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+
+<!--Parameter Modal-->
+<div bsModal #parameterModal="bs-modal" class="modal fade" id="parameterModal" tabindex="-1" role="dialog"
+	aria-labelledby="parameterModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">New Parameter</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"
+					(click)="parameterModal.hide()">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<form>
+					<!--Parameter Name-->
+					<div class="form-group">
+						<label for="parameter-name" class="col-form-label">Parameter Name:</label>
+						<input type="text" class="form-control" id="parameter-name" name="parameter-name"
+							[(ngModel)]="currentParameter.parameterName">
+					</div>
+					<!--Parameter value-->
+					<div class="form-group">
+						<label for="parameter-value" class="col-form-label">Parameter Value:</label>
+						<input type="text" class="form-control" id="parameter-value" name="parameter-value"
+							[(ngModel)]="currentParameter.parameterValue">
+					</div>
+					<!--Parameter Type-->
+					<div class="form-group">
+						<label for="parameter-type" class="col-form-label">Parameter Type:</label>
+						<input type="text" class="form-control" id="parameter-type" name="parameter-type"
+							[(ngModel)]="currentParameter.parameterType">
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal"
+					(click)="parameterModal.hide()">Cancel</button>
+				<button type="button" class="btn btn-primary" (click)="doAddParameter()">Add</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!--Response Modal-->
+<div bsModal #responseModal="bs-modal" class="modal fade" id="parameterModal" tabindex="-1" role="dialog"
+	aria-labelledby="parameterModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">New Response</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"
+					(click)="responseModal.hide()">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<form>
+					<!--Response Name-->
+					<div class="form-group">
+						<label for="response-name" class="col-form-label">Response Name:</label>
+						<input type="text" class="form-control" id="response-name" name="response-name"
+							*ngIf="currentResponse != undefined" [(ngModel)]="currentResponse.name">
+					</div>
+					<!--Response value-->
+					<div class="form-group">
+						<label for="item-count" class="col-form-label">Item Count:</label>
+						<input type="text" class="form-control" id="item-count" name="item-count"
+							*ngIf="currentResponse != undefined" [(ngModel)]="currentResponse.maxSize">
+					</div>
+					<div class="form-group">
+						<label for="item-count" class="col-form-label">Type:</label>
+						<select class="form-control" id="nationality" required name="type-select"
+							*ngIf="currentResponse != undefined" [(ngModel)]="currentResponse.responseType"
+							(change)="changeResponseType($event)">
+							<option>String</option>
+							<option>Integer</option>
+							<option>Boolean</option>
+							<option>Model</option>
+						</select>
+					</div>
+					<!--Formats-->
+					<div *ngIf="currentResponse != undefined && currentResponse.responseType == 'Model'">
+						<p>model type</p>
+					</div>
+					<div *ngIf="currentResponse != undefined && currentResponse.responseType != 'Model'">
+						<p>not model type</p>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer" #helloo>
+				<button type="button" class="btn btn-secondary" data-dismiss="modal"
+					(click)="responseModal.hide()">Cancel</button>
+				<button type="button" class="btn btn-primary" (click)="doAddResponse()">Add</button>
+				<button type="button" class="btn btn-primary" (click)="doAddResponseAttributes()">Add Attribute</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Format -->
+<div bsModal #formatModal="bs-modal" class="modal fade" id="parameterModal" tabindex="-1" role="dialog"
+	aria-labelledby="parameterModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">New Response</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"
+					(click)="responseModal.hide()">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<form>
+					<!--Format Name-->
+					<div class="form-group">
+						<label for="response-name" class="col-form-label">Response Name:</label>
+						<input type="text" class="form-control" id="response-name" name="response-name"
+							*ngIf="currentFormat != undefined" [(ngModel)]="currentFormat.name">
+					</div>
+					<!--Format Type-->
+					<div class="form-group">
+						<label for="item-count" class="col-form-label">Type:</label>
+						<select class="form-control" id="nationality" required name="type-select"
+							*ngIf="currentFormat != undefined" [(ngModel)]="currentFormat.type"
+							(change)="changeResponseType($event)">
+							<option>String</option>
+							<option>Integer</option>
+							<option>Boolean</option>
+							<option>Model</option>
+						</select>
+					</div>
+					<!--Formats-->
+					<!--<div *ngIf="currentFormat != undefined && currentFormat.responseType == 'Model'">
+						<p>model type</p>
+					</div>
+					<div *ngIf="currentFormat != undefined && currentFormat.responseType != 'Model'">
+						<p>not model type</p>
+					</div>-->
+				</form>
+			</div>
+			<div class="modal-footer" #helloo>
+				<button type="button" class="btn btn-secondary" data-dismiss="modal"
+					(click)="currentFormat.hide()">Cancel</button>
+				<button type="button" class="btn btn-primary" (click)="addFormat()">Add</button>
+				<button type="button" class="btn btn-primary" (click)="doAddResponseAttributes()">Add Attribute</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!--Simple Format Modal-->
+<div bsModal #simpleFormatModal="bs-modal" class="modal fade" id="simpleFormatModal" tabindex="-1" role="dialog"
+	aria-labelledby="simpleFormatModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="attributeModalLabel">New Parameter</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"
+					(click)="simpleFormatModal.hide()">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<form>
+					<tabset type="pills">
+						<tab heading="Random" (select)="onSelectRandom($event)"></tab>
+						<tab heading="Custom" (select)="onSelectCustom($event)"></tab>
+					</tabset>
+					<!--Format Type-->
+					<div class="form-group" *ngIf="isRandom">
+						<label for="parameter-name" class="col-form-label">Type:</label>
+						<input type="text" class="form-control" id="format-type" name="format-type"
+							[(ngModel)]="this.currentSimpleFormat.specific">
+					</div>
+					<!--Format Specific Value-->
+					<div class="form-group" *ngIf="!isRandom">
+						<label for="parameter-value" class="col-form-label">Custom Value:</label>
+						<input type="text" class="form-control" id="format-specific-value" name="format-specific-value"
+							[(ngModel)]="this.currentSimpleFormat.defaultValue">
+					</div>
+					<!--Format Default Value-->
+					<div class="form-group">
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+				<button type="button" class="btn btn-primary" (click)="addValueTypeValue($event)">Add</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!--Complex Format Modal-->
+<div bsModal #complexFormatModal="bs-modal" class="modal fade" id="parameterModal" tabindex="-1" role="dialog"
+	aria-labelledby="parameterModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">New Response</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"
+					(click)="responseModal.hide()">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<form>
+					<!--Response Name-->
+					<div class="form-group">
+						<label for="response-name" class="col-form-label">Response Name:</label>
+						<input type="text" class="form-control" id="response-name" name="response-name"
+							*ngIf="currentResponse != undefined" [(ngModel)]="currentResponse.name">
+					</div>
+					<!--Response value-->
+					<div class="form-group">
+						<label for="item-count" class="col-form-label">Item Count:</label>
+						<input type="text" class="form-control" id="item-count" name="item-count"
+							*ngIf="currentResponse != undefined" [(ngModel)]="currentResponse.maxSize">
+					</div>
+					<div class="form-group">
+						<label for="item-count" class="col-form-label">Type:</label>
+						<select class="form-control" id="nationality" required name="type-select"
+							*ngIf="currentResponse != undefined" [(ngModel)]="currentResponse.responseType"
+							(change)="changeResponseType($event)">
+							<option>String</option>
+							<option>Integer</option>
+							<option>Boolean</option>
+							<option>Model</option>
+						</select>
+					</div>
+					<!--Formats-->
+					<div *ngIf="currentResponse != undefined && currentResponse.responseType == 'Model'">
+						<p>model type</p>
+					</div>
+					<div *ngIf="currentResponse != undefined && currentResponse.responseType != 'Model'">
+						<p>not model type</p>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer" #helloo>
+				<button type="button" class="btn btn-secondary" data-dismiss="modal"
+					(click)="responseModal.hide()">Cancel</button>
+				<button type="button" class="btn btn-primary" (click)="doAddResponse()">Add</button>
+				<button type="button" class="btn btn-primary" (click)="doAddResponseAttributes()">Add Attribute</button>
+			</div>
+		</div>
+	</div>
+</div>
