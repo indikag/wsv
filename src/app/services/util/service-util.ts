@@ -24,4 +24,24 @@ export class ServiceUtil {
     public static getServicesByGroupId(userId: string) {
         return ServiceUtil.servicePrefix + 'service/get?id=' + userId;
     }
+
+    public static addService() {
+        return ServiceUtil.servicePrefix + 'service/add';
+    }
+
+    public static getServiceByServiceId(serviceId: string) {
+        return ServiceUtil.servicePrefix + 'service/getService?id=' + serviceId;
+    }
+
+    public static deleteService(serviceId: string) {
+        return ServiceUtil.servicePrefix + 'service/delete?id=' + serviceId;
+    }
+
+    public static publishService(serviceId: string) {
+        return ServiceUtil.servicePrefix + 'service/publish?id=' + serviceId;
+    }
+
+    public static unpublishService(serviceId: string) {
+        return ServiceUtil.servicePrefix + 'service/unpublish?id=' + serviceId;
+    }
 }
