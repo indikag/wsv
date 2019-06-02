@@ -24,6 +24,8 @@ import { ComplexFormatComponent } from './service-define/form-templates/complex-
 import { SimpleFormatComponent } from './service-define/form-templates/simple-format/simple-format.component';
 import { MethodComponent } from './services/method/method.component';
 import { DataService } from './data.service';
+import { AlertComponent } from './util/alert/alert.component';
+import { AlertService } from './util/alert/alert.service';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,8 @@ import { DataService } from './data.service';
     ServiceLogComponent,
     ComplexFormatComponent,
     SimpleFormatComponent,
-    MethodComponent
+    MethodComponent,
+    AlertComponent
   ],
   imports: [
     BrowserModule,
@@ -52,7 +55,10 @@ import { DataService } from './data.service';
     ModalModule.forRoot(),
     ArchwizardModule
   ],
-  providers: [DataService],
+  providers: [
+    DataService,
+    AlertService
+  ],
   bootstrap: [AppComponent],
 
 })
