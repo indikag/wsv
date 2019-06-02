@@ -99,7 +99,7 @@ export class ServicelistComponent implements OnInit, WsCallback {
 	}
 
 	public loadEditPage(serviceid: any) {
-		this.router.navigateByUrl('service');
+		this.router.navigate(['service'], { queryParams: { sId: serviceid } });
 	}
 
 	public publishService(serviceid: any) {
