@@ -9,13 +9,19 @@ import { ComplexDataFormat } from 'src/app/service-define/service-model-class/co
 import { Format } from 'src/app/service-define/service-model-class/format.model';
 import { BsModalRef, BsModalService, ModalDirective, TabDirective } from 'ngx-bootstrap';
 import { ServiceModel } from 'src/app/service-define/service-model-class/service-model.model';
+import { WsCallback } from '../util/ws-callback';
+import { WsResponse } from '../util/ws-response.model';
+import { WsType } from '../util/ws-type';
+import { AlertService } from 'src/app/util/alert/alert.service';
+import { UserService } from '../user.service';
+import { UserServicesService } from '../user-services.service';
 
 @Component({
   selector: 'app-method',
   templateUrl: './method.component.html',
   styleUrls: ['./method.component.css']
 })
-export class MethodComponent implements OnInit {
+export class MethodComponent implements OnInit, WsCallback {
   @ViewChild('methodModal') childModal: ModalDirective;
   @ViewChild('parameterModal') parameterModal: ModalDirective;
   @ViewChild('responseModal') responseModal: ModalDirective;
@@ -52,7 +58,9 @@ export class MethodComponent implements OnInit {
 
   // utility variables
   public isRandom = true;
-  constructor(private router: Router, private dataService: DataService, private modalService: BsModalService) { }
+  constructor(private router: Router, private dataService: DataService,
+     private modalService: BsModalService, private alertService: AlertService,
+     private userService: UserServicesService) { }
 
   ngOnInit() {
     this.selectedMethod = this.dataService.getSelectedMethod();
@@ -146,6 +154,13 @@ export class MethodComponent implements OnInit {
   onSaveButtonClick() {
     const newLocal = JSON.stringify(this.serviceModel);
     console.log(newLocal);
+    if (newLocal !== undefined && newLocal.trim() !== '') {
+      // do the save
+      this.userService.addService(newLocal, this);
+    } else {
+      // show the error message
+      this.alertService.error('Cannot save empty data');
+    }
   }
 
   ////// UTILITIES
@@ -155,5 +170,21 @@ export class MethodComponent implements OnInit {
 
   onSelectCustom(data: TabDirective) {
     this.isRandom = false;
+  }
+
+  onSuccess(data: WsResponse, serviceType: WsType) {
+    if (serviceType === WsType.ADD_SERVICE) {
+      this.alertService.success(data.statusDescription, false);
+      this.router.navigateByUrl('home');
+    } else if (serviceType === WsType.GET_SERVICE_BY_SERVICE_ID) {
+      this.alertService.error(data.statusDescription, false);
+    }
+  }
+  onFail(data: WsResponse, serviceType: WsType) {
+    if (serviceType === WsType.ADD_SERVICE) {
+      this.alertService.error(data.statusDescription, false);
+    } else if (serviceType === WsType.GET_SERVICE_BY_SERVICE_ID) {
+      this.alertService.error(data.statusDescription, false);
+    }
   }
 }
