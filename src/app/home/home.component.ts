@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { DataService } from '../data.service';
 
 @Component({
 	selector: 'app-home',
@@ -7,15 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-	public isToggleMenu: boolean = false
+	public isToggleMenu: boolean = false;
 
-	constructor() { }
+	constructor(private router: Router, private dataService: DataService) { }
 
 	ngOnInit() {
 	}
 
 	public showToggleMenu() {
-		this.isToggleMenu = !this.isToggleMenu
+		this.isToggleMenu = !this.isToggleMenu;
 	}
 
+	onNewButtonClick() {
+		// if you want to pass any additional data pls use dataService.
+		this.router.navigateByUrl('service');
+	}
 }
