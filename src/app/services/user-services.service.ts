@@ -118,7 +118,7 @@ export class UserServicesService {
      * @param serviceId id of the service
      * @param callBack callback class
      */
-    public addServgetServiceByServiceIdice(serviceId: string, callBack: WsCallback) {
+    public getServiceByServiceId(serviceId: string, callBack: WsCallback) {
         this.http.get(ServiceUtil.getServiceByServiceId(serviceId)).subscribe(
             data => {
                 const modified = JSON.parse(JSON.stringify(data));
