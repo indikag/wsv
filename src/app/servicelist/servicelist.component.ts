@@ -10,6 +10,7 @@ import { UserService } from '../services/user.service';
 import { UserServicesService } from '../services/user-services.service';
 import { Router } from '@angular/router';
 import { UserGroupService } from '../services/user-group.service';
+import { AlertService } from '../util/alert/alert.service';
 
 @Component({
 	selector: 'app-servicelist',
@@ -23,7 +24,7 @@ export class ServicelistComponent implements OnInit, WsCallback {
 	private userServiceList: any = [];
 
 	constructor(private servicesService: UserServicesService, private userService: UserService,
-		 private router: Router, private groupService: UserGroupService) {
+		 private router: Router, private groupService: UserGroupService, private alertService: AlertService) {
 		this.userId = localStorage.getItem(Constants.WSV_USER);
 	}
 
@@ -54,9 +55,23 @@ export class ServicelistComponent implements OnInit, WsCallback {
 				this.servicesService.getServicesByGroupId(group.groupId, this);
 			});
 		} else if (serviceType === WsType.GET_SERVICES_BY_GROUP_ID) {
+			this.userServiceList = [];
 			data.payload.forEach(item => {
 				this.userServiceList[this.userServiceList.length] = item;
 			});
+		} else if (serviceType === WsType.DELETE_SERVICE) {
+			if (data.payload === true) {
+				this.alertService.success('Service was deleted successfully');
+				this.groupService.getUserGroups(this.userId, this);
+			} else {
+				this.alertService.error('Service deletion failed');
+			}
+		} else if (serviceType === WsType.PUBLISH_SERVICE) {
+			this.alertService.success('Service was published successfully');
+			this.groupService.getUserGroups(this.userId, this);
+		} else if (serviceType === WsType.UNPUBLISH_SERVICE) {
+			this.alertService.success('Service was unpublished successfully');
+			this.groupService.getUserGroups(this.userId, this);
 		}
 	}
 	onFail(data: WsResponse, serviceType: WsType) {
@@ -67,6 +82,14 @@ export class ServicelistComponent implements OnInit, WsCallback {
 		} else if (serviceType === WsType.GET_GROUPS_BY_USER_ID) {
 			console.log(data.statusDescription);
 		} else if (serviceType === WsType.GET_SERVICES_BY_GROUP_ID) {
+			console.log(data.statusDescription);
+		} else if (serviceType === WsType.DELETE_SERVICE) {
+			console.log(data.statusDescription);
+		} else if (serviceType === WsType.PUBLISH_SERVICE) {
+			this.alertService.success('Service publishing failed');
+			console.log(data.statusDescription);
+		} else if (serviceType === WsType.UNPUBLISH_SERVICE) {
+			this.alertService.success('Service unpublishing failed');
 			console.log(data.statusDescription);
 		}
 	}
@@ -80,14 +103,15 @@ export class ServicelistComponent implements OnInit, WsCallback {
 	}
 
 	public publishService(serviceid: any) {
-		console.log('PUBLISH serviceId = ' + serviceid);
+		this.servicesService.publishService(serviceid, this);
 	}
 
 	public unpublishService(serviceid: any) {
-		console.log('UNPUBLISH serviceId = ' + serviceid);
+		this.servicesService.unpublishService(serviceid, this);
 	}
 
 	public deleteService(serviceid: any) {
 		console.log('DELETE serviceId = ' + serviceid);
+		this.servicesService.deleteService(serviceid, this);
 	}
 }
