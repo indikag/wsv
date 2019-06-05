@@ -19,11 +19,11 @@
 								<i class="fal fa-file-alt fa-lg"></i>
 							</button>
 							<button type="button" class="btn btn-outline-purple btn-sm m-1 float-right" (click)="deleteService(service.serviceId)"
-							 tooltip="Delete" placement="top" container="body">
+							*ngIf="!service.published" tooltip="Delete" placement="top" container="body">
 								<i class="fal fa-trash-alt fa-lg"></i>
 							</button>
 							<button type="button" class="btn btn-outline-purple btn-sm m-1 float-right" (click)="loadEditPage(service.serviceId)"
-							 tooltip="Edit" placement="top" container="body">
+							*ngIf="!service.published" tooltip="Edit" placement="top" container="body">
 								<i class="fal fa-file-edit fa-lg"></i>
 							</button>
 							<button type="button" class="btn btn-outline-purple btn-sm m-1 float-right" (click)="publishService(service.serviceId)"
@@ -87,11 +87,11 @@
 								<i class="fal fa-file-alt fa-lg"></i>
 							</button>
 							<button type="button" class="btn btn-outline-purple btn-sm m-1 float-right" (click)="deleteService(service.serviceId)"
-							 tooltip="Delete" placement="top" container="body">
+							*ngIf="!service.published" tooltip="Delete" placement="top" container="body">
 								<i class="fal fa-trash-alt fa-lg"></i>
 							</button>
-							<button type="button" class="btn btn-outline-purple btn-sm m-1 float-right" (click)="loadEditPage(service.serviceId)"
-							 tooltip="Edit" placement="top" container="body">
+							<button type="button"  class="btn btn-outline-purple btn-sm m-1 float-right" (click)="loadEditPage(service.serviceId)"
+							*ngIf="!service.published" tooltip="Edit" placement="top" container="body">
 								<i class="fal fa-file-edit fa-lg"></i>
 							</button>
 							<button type="button" class="btn btn-outline-purple btn-sm m-1 float-right" (click)="publishService(service.serviceId)"
