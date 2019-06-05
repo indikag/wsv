@@ -25,8 +25,8 @@ export class ServiceUtil {
         return ServiceUtil.servicePrefix + 'service/get?id=' + userId;
     }
 
-    public static addService() {
-        return ServiceUtil.servicePrefix + 'service/add';
+    public static addService(groupId: string) {
+        return ServiceUtil.servicePrefix + 'service/add?groupId=' + groupId;
     }
 
     public static getServiceByServiceId(serviceId: string) {
