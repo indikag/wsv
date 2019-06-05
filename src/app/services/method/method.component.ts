@@ -156,7 +156,7 @@ export class MethodComponent implements OnInit, WsCallback {
     console.log(newLocal);
     if (newLocal !== undefined && newLocal.trim() !== '') {
       // do the save
-      this.userService.addService(newLocal, this);
+      this.userService.addService(newLocal, '1-g', this);
     } else {
       // show the error message
       this.alertService.error('Cannot save empty data');
