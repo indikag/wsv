@@ -83,8 +83,8 @@ export class UserServicesService {
      * @param postData {"serviceId":"","jsonFile":"","serviceName":"","serviceUrl":"","published":"","groups":null}
      * @param callBack callback class
      */
-    public addService(postData: any, callBack: WsCallback) {
-        this.http.post(ServiceUtil.addService(), postData).subscribe(
+    public addService(postData: any, groupId: string, callBack: WsCallback) {
+        this.http.post(ServiceUtil.addService(groupId), JSON.stringify(postData)).subscribe(
             data => {
                 const modified = JSON.parse(JSON.stringify(data));
                 const res = new WsResponse(
@@ -95,7 +95,7 @@ export class UserServicesService {
                 callBack.onSuccess(res, WsType.GET_SERVICES_BY_GROUP_ID);
             },
             error => {
-                if (error.status !== '') {
+                if (error.status !== '' && !(error instanceof HttpErrorResponse)) {
                     const val = (error as HttpErrorResponse).error;
                     const modified = JSON.parse(JSON.stringify(val));
                     const res: WsResponse = new WsResponse(
@@ -106,7 +106,7 @@ export class UserServicesService {
                     callBack.onFail(res, WsType.GET_SERVICES_BY_GROUP_ID);
                 } else {
                     // browser related issues
-                    const res = new WsResponse('Unknown error happened');
+                    const res = new WsResponse(error.statusText);
                     callBack.onFail(res, WsType.GET_SERVICES_BY_GROUP_ID);
                 }
             }
@@ -127,7 +127,7 @@ export class UserServicesService {
                     modified.status.code,
                     modified.status.name,
                     modified.payload);
-                callBack.onSuccess(res, WsType.GET_SERVICES_BY_GROUP_ID);
+                callBack.onSuccess(res, WsType.GET_SERVICE_BY_SERVICE_ID);
             },
             error => {
                 if (error.status !== '') {
@@ -138,11 +138,11 @@ export class UserServicesService {
                         modified.status.code,
                         modified.status.name,
                         modified.payload);
-                    callBack.onFail(res, WsType.GET_SERVICES_BY_GROUP_ID);
+                    callBack.onFail(res, WsType.GET_SERVICE_BY_SERVICE_ID);
                 } else {
                     // browser related issues
                     const res = new WsResponse('Unknown error happened');
-                    callBack.onFail(res, WsType.GET_SERVICES_BY_GROUP_ID);
+                    callBack.onFail(res, WsType.GET_SERVICE_BY_SERVICE_ID);
                 }
             }
         );
