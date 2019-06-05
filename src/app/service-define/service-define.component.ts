@@ -7,15 +7,20 @@ import { Response } from './service-model-class/response.model';
 import { SimpleDataFormat } from './service-model-class/simple-data-format.model';
 import { ComplexDataFormat } from './service-model-class/complex-data-format.model';
 import { Format } from './service-model-class/format.model';
-import { Router, NavigationExtras } from '@angular/router';
+import { Router, NavigationExtras, ActivatedRoute } from '@angular/router';
 import { DataService } from '../data.service';
+import { UserServicesService } from '../services/user-services.service';
+import { WsCallback } from '../services/util/ws-callback';
+import { WsResponse } from '../services/util/ws-response.model';
+import { WsType } from '../services/util/ws-type';
+import { AlertService } from '../util/alert/alert.service';
 
 @Component({
   selector: 'app-service-define',
   templateUrl: './service-define.component.html',
   styleUrls: ['./service-define.component.css']
 })
-export class ServiceDefineComponent implements OnInit {
+export class ServiceDefineComponent implements OnInit, WsCallback {
   @ViewChild('methodModal') childModal: ModalDirective;
   @ViewChild('parameterModal') parameterModal: ModalDirective;
   @ViewChild('responseModal') responseModal: ModalDirective;
@@ -51,18 +56,26 @@ export class ServiceDefineComponent implements OnInit {
   // Common variables for the class
   private modalRef: BsModalRef;
 
-
   // utility variables
   public isRandom = true;
 
+  /////// EDIT SERVICE RELATED PARAMETERS ///
+  public serviceId;
 
-  constructor(private modalService: BsModalService, private router: Router, private dataService: DataService) {
+  constructor(private modalService: BsModalService, private router: Router, private dataService: DataService,
+    private route: ActivatedRoute, private servicesService: UserServicesService, private alertService: AlertService) {
     // Assigning initial empty method list
     this.serviceModel.serviceMethods = this.serviceMethods;
   }
 
   ngOnInit() {
     // this.setInitialValues();
+    if (this.route.snapshot.queryParams.sId !== undefined) {
+      this.serviceId = this.route.snapshot.queryParams.sId;
+      this.servicesService.getServiceByServiceId(this.serviceId, this);
+    } else {
+      // new service
+    }
   }
 
   // for testing purposes (initial data loading part)
@@ -125,5 +138,65 @@ export class ServiceDefineComponent implements OnInit {
     this.serviceMethods.push(this.currentMethod);
     // this.currentMethod = null;
     this.childModal.hide();
+  }
+
+  public onSaveButtonClick() {
+    console.log('save the service');
+    // serviceId serviceName serviceUrl jsonFile published;
+    // {"serviceId":"","jsonFile":"","serviceName":"","serviceUrl":"","published":""}
+    if (this.serviceId === '' || this.serviceId === undefined) {
+      const data = {
+        'serviceId': '',
+        'jsonFile': JSON.stringify(this.serviceModel),
+        'serviceName': this.serviceModel.serviceName,
+        'serviceUrl': '', 'published': false
+      };
+      this.servicesService.addService(data, '1-g', this);
+    } else {
+      // update the service
+    }
+  }
+
+  onSuccess(data: WsResponse, serviceType: WsType) {
+    if (serviceType === WsType.GET_SERVICE_BY_SERVICE_ID) {
+      this.serviceId = data.payload.serviceId;
+      const jsonFile_ = JSON.parse(data.payload.jsonFile);
+      this.serviceModel = this.processJsonFile(jsonFile_);
+      this.serviceMethods = this.serviceModel.serviceMethods;
+    } else if (serviceType === WsType.ADD_SERVICE) {
+      this.alertService.success('Successfully added the service', false);
+    }
+  }
+
+  onFail(data: WsResponse, serviceType: WsType) {
+    if (serviceType === WsType.GET_SERVICE_BY_SERVICE_ID) {
+      console.log(data);
+    } else if (serviceType === WsType.ADD_SERVICE) {
+      this.alertService.error('Error, could not add the service', false);
+    }
+  }
+
+  private processJsonFile(file: any): ServiceModel {
+    if (file == null || file === undefined) {
+      console.error('File cannot be null or undefined');
+    }
+    // Initialize the service model
+    const sModel = new ServiceModel();
+    sModel.serviceDescription = file.serviceDescription;
+    sModel.serviceName = file.serviceName;
+
+    // Initialize methods
+    const serviceMethods: ServiceMethods[] = [];
+    file.serviceMethods.forEach(method => {
+      const m = new ServiceMethods();
+      m.methodName = method.methodName;
+      m.parameters = method.parameters;
+      m.type = method.type;
+
+      serviceMethods.push(m);
+    });
+    sModel.serviceMethods = serviceMethods;
+
+    return sModel;
   }
 }
