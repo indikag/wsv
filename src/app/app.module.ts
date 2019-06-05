@@ -11,7 +11,7 @@ import { HeaderComponent } from './header/header.component';
 import { ServicelistComponent } from './servicelist/servicelist.component';
 import { UserLoginComponent } from './user/user-login/user-login.component';
 import { AppRoutingModule } from './app-routing/app-routing.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HomeComponent } from './home/home.component';
 
 import { TabsModule } from 'ngx-bootstrap/tabs';
@@ -26,6 +26,7 @@ import { MethodComponent } from './services/method/method.component';
 import { DataService } from './data.service';
 import { AlertComponent } from './util/alert/alert.component';
 import { AlertService } from './util/alert/alert.service';
+import { BasicRequest } from './util/basic-request';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,12 @@ import { AlertService } from './util/alert/alert.service';
   ],
   providers: [
     DataService,
-    AlertService
+    AlertService,
+    {
+			provide: HTTP_INTERCEPTORS,
+			useClass: BasicRequest,
+			multi: true
+		}
   ],
   bootstrap: [AppComponent],
 
