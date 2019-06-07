@@ -9,4 +9,5 @@ export class WsType {
     public static DELETE_SERVICE = 8;
     public static PUBLISH_SERVICE = 9;
     public static UNPUBLISH_SERVICE = 10;
+    public static UPDATE_SERVICE = 11;
 }

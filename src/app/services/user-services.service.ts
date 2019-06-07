@@ -252,4 +252,34 @@ export class UserServicesService {
             }
         );
     }
+
+    public updateService(postData: any, callBack: WsCallback) {
+        this.http.post(ServiceUtil.updateService(), JSON.stringify(postData)).subscribe(
+            data => {
+                const modified = JSON.parse(JSON.stringify(data));
+                const res = new WsResponse(
+                    modified.status.description,
+                    modified.status.code,
+                    modified.status.name,
+                    modified.payload);
+                callBack.onSuccess(res, WsType.UPDATE_SERVICE);
+            },
+            error => {
+                if (error.status !== '' && !(error instanceof HttpErrorResponse)) {
+                    const val = (error as HttpErrorResponse).error;
+                    const modified = JSON.parse(JSON.stringify(val));
+                    const res: WsResponse = new WsResponse(
+                        modified.status.description,
+                        modified.status.code,
+                        modified.status.name,
+                        modified.payload);
+                    callBack.onFail(res, WsType.UPDATE_SERVICE);
+                } else {
+                    // browser related issues
+                    const res = new WsResponse(error.statusText);
+                    callBack.onFail(res, WsType.UPDATE_SERVICE);
+                }
+            }
+        );
+    }
 }

@@ -44,4 +44,8 @@ export class ServiceUtil {
     public static unpublishService(serviceId: string) {
         return ServiceUtil.servicePrefix + 'service/unpublish?id=' + serviceId;
     }
+
+    public static updateService() {
+        return ServiceUtil.servicePrefix + 'service/update';
+    }
 }

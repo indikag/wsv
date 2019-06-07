@@ -165,6 +165,9 @@ export class ServiceDefineComponent implements OnInit, WsCallback {
       this.serviceMethods = this.serviceModel.serviceMethods;
     } else if (serviceType === WsType.ADD_SERVICE) {
       this.alertService.success('Successfully added the service', false);
+    } else if (serviceType === WsType.UPDATE_SERVICE) {
+      this.alertService.success('Service update success');
+      this.servicesService.getServiceByServiceId(this.serviceId, this);
     }
   }
 
@@ -173,7 +176,21 @@ export class ServiceDefineComponent implements OnInit, WsCallback {
       console.log(data);
     } else if (serviceType === WsType.ADD_SERVICE) {
       this.alertService.error('Error, could not add the service', false);
+    } else if (serviceType === WsType.UPDATE_SERVICE) {
+      this.alertService.error('Error, could not update the service', false);
     }
+  }
+
+  public onUpdateButtonClick() {
+    console.log('update the service');
+    console.log(this.serviceModel);
+    const data = {
+      'serviceId': this.serviceId,
+      'jsonFile': JSON.stringify(this.serviceModel),
+      'serviceName': this.serviceModel.serviceName,
+      'serviceUrl': '', 'published': false
+    };
+    this.servicesService.updateService(data, this);
   }
 
   private processJsonFile(file: any): ServiceModel {
@@ -184,6 +201,7 @@ export class ServiceDefineComponent implements OnInit, WsCallback {
     const sModel = new ServiceModel();
     sModel.serviceDescription = file.serviceDescription;
     sModel.serviceName = file.serviceName;
+    sModel.serviceId = this.serviceId;
 
     // Initialize methods
     const serviceMethods: ServiceMethods[] = [];
