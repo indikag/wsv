@@ -165,6 +165,7 @@ export class ServiceDefineComponent implements OnInit, WsCallback {
       const jsonFile_ = JSON.parse(data.payload.jsonFile);
       this.serviceModel = this.processJsonFile(jsonFile_);
       this.serviceMethods = this.serviceModel.serviceMethods;
+      console.log(this.serviceModel);
     } else if (serviceType === WsType.ADD_SERVICE) {
       this.alertService.success('Successfully added the service', false);
     } else if (serviceType === WsType.UPDATE_SERVICE) {
@@ -184,8 +185,6 @@ export class ServiceDefineComponent implements OnInit, WsCallback {
   }
 
   public onUpdateButtonClick() {
-    console.log('update the service');
-    console.log(this.serviceModel);
     const data = {
       'serviceId': this.serviceId,
       'jsonFile': JSON.stringify(this.serviceModel),
@@ -214,7 +213,6 @@ export class ServiceDefineComponent implements OnInit, WsCallback {
       'serviceName': this.serviceModel.serviceName,
       'serviceUrl': '', 'published': false
     };
-    console.log('DATA=' + data);
     this.servicesService.updateService(data, this);
   }
 
@@ -236,6 +234,14 @@ export class ServiceDefineComponent implements OnInit, WsCallback {
       m.parameters = method.parameters;
       m.type = method.type;
 
+      const res = new Response();
+      res.minSize = 0;
+      res.maxSize = method.response.maxSize;
+      res.name = method.response.name;
+      res.responseType = method.response.responseType;
+      res.format = null; // TODO  this values is not set yet.
+
+      m.response = res;
       serviceMethods.push(m);
     });
     sModel.serviceMethods = serviceMethods;
