@@ -64,8 +64,9 @@
 							<button type="button" class="btn btn-primary" (click)="addResponse()"
 								*ngIf="currentResponse == undefined">Add Response</button>-->
 							<!--Edit method-->
-							<button type="button" class="btn btn-primary" (click)="editMethod()">Add
-								Edit</button>
+							<button type="button" class="btn btn-primary" (click)="editMethod(serviceMethod)">Edit</button>
+							<button type="button" class="btn btn-primary" (click)="changeMethodNameType(serviceMethod, template)">Change</button>
+							<button type="button" class="btn btn-primary" (click)="deleteMethod(serviceMethod)">Delete Method</button>
 						</div>
 					</div>
 				</div>
@@ -164,6 +165,40 @@
 				<button type="button" class="btn btn-secondary" data-dismiss="modal"
 					(click)="methodModal.hide()">Cancel</button>
 				<button type="button" class="btn btn-primary" (click)="doAddMethod()">Add</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div bsModal #changeMethodModal="bs-modal" class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+	aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">New method</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"
+					(click)="changeMethodModal.hide()">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<form>
+					<div class="form-group">
+						<label for="recipient-name" class="col-form-label">Method Name:</label>
+						<input type="text" class="form-control" id="recipient-name" name="recipient-name"
+							[(ngModel)]="currentMethod.methodName">
+					</div>
+					<div class="form-group">
+						<label for="message-text" class="col-form-label">Type:</label>
+						<input type="text" class="form-control" id="message-text" name="message-text"
+							[(ngModel)]="currentMethod.type">
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal"
+					(click)="changeMethodModal.hide()">Cancel</button>
+				<button type="button" class="btn btn-primary" (click)="changeMethodModal.hide()">Update</button>
 			</div>
 		</div>
 	</div>

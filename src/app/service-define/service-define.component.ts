@@ -21,6 +21,7 @@ import { AlertService } from '../util/alert/alert.service';
   styleUrls: ['./service-define.component.css']
 })
 export class ServiceDefineComponent implements OnInit, WsCallback {
+  @ViewChild('changeMethodModal') changeMethodModal: ModalDirective;
   @ViewChild('methodModal') childModal: ModalDirective;
   @ViewChild('parameterModal') parameterModal: ModalDirective;
   @ViewChild('responseModal') responseModal: ModalDirective;
@@ -116,7 +117,7 @@ export class ServiceDefineComponent implements OnInit, WsCallback {
   }
 
   // Show edit method page
-  public editMethod() {
+  public editMethod(serviceMethod: ServiceMethods) {
     // const data: NavigationExtras = {selectedMethod: this.currentMethod};
     // this.router.navigate(['method'], {state: data);
     /*const navigationExtras: NavigationExtras = {
@@ -125,7 +126,8 @@ export class ServiceDefineComponent implements OnInit, WsCallback {
       }
     };*/
     this.dataService.setServiceModel(this.serviceModel);
-    this.dataService.setSelectedMethod(this.currentMethod);
+    this.dataService.setSelectedMethod(serviceMethod);
+    console.log(this.currentMethod);
     this.router.navigateByUrl('method');
   }
 
@@ -190,6 +192,29 @@ export class ServiceDefineComponent implements OnInit, WsCallback {
       'serviceName': this.serviceModel.serviceName,
       'serviceUrl': '', 'published': false
     };
+    this.servicesService.updateService(data, this);
+  }
+
+  public changeMethodNameType(serviceMethod: ServiceMethods) {
+    console.log(serviceMethod);
+    this.currentMethod = serviceMethod;
+    this.changeMethodModal.show();
+  }
+
+  public deleteMethod(serviceMethod: ServiceMethods) {
+    console.log('delete the method');
+    const index = this.serviceModel.serviceMethods.indexOf(serviceMethod);
+    if (index !== -1) {
+      this.serviceModel.serviceMethods.splice(index, 1);
+    }
+
+    const data = {
+      'serviceId': this.serviceId,
+      'jsonFile': JSON.stringify(this.serviceModel),
+      'serviceName': this.serviceModel.serviceName,
+      'serviceUrl': '', 'published': false
+    };
+    console.log('DATA=' + data);
     this.servicesService.updateService(data, this);
   }
 

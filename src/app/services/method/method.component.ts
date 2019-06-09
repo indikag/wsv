@@ -60,7 +60,7 @@ export class MethodComponent implements OnInit, WsCallback {
   public isRandom = true;
   constructor(private router: Router, private dataService: DataService,
      private modalService: BsModalService, private alertService: AlertService,
-     private userService: UserServicesService) { }
+     private userService: UserServicesService, private servicesService: UserServicesService) { }
 
   ngOnInit() {
     this.selectedMethod = this.dataService.getSelectedMethod();
@@ -71,9 +71,21 @@ export class MethodComponent implements OnInit, WsCallback {
     }
 
     if (this.selectedMethod === undefined) {
-      this.router.navigateByUrl('service');
+      this.router.navigateByUrl('home');
     }
+
+    this.loadInitialData();
+
     console.log('this is the method ' + this.selectedMethod);
+  }
+
+  loadInitialData() {
+    if (this.serviceModel !== undefined) {
+      this.parameterList = this.selectedMethod.parameters;
+      this.currentResponse = this.selectedMethod.response;
+    } else {
+      this.alertService.error('Service Model cannot be null');
+    }
   }
 
    // Parameters
@@ -156,7 +168,18 @@ export class MethodComponent implements OnInit, WsCallback {
     console.log(newLocal);
     if (newLocal !== undefined && newLocal.trim() !== '') {
       // do the save
-      this.userService.addService(newLocal, '1-g', this);
+      // this.userService.addService(newLocal, '1-g', this);
+      if (this.serviceModel.serviceId !== undefined || this.serviceModel.serviceId !== '') {
+        // update the existing service
+        const data = {
+          'serviceId': this.serviceModel.serviceId,
+          'jsonFile': JSON.stringify(this.serviceModel),
+          'serviceName': this.serviceModel.serviceName,
+          'serviceUrl': '', 'published': false
+        };
+        this.servicesService.updateService(data, this);
+      }
+
     } else {
       // show the error message
       this.alertService.error('Cannot save empty data');
