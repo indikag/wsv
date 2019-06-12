@@ -239,7 +239,7 @@ export class ServiceDefineComponent implements OnInit, WsCallback {
       res.maxSize = method.response.maxSize;
       res.name = method.response.name;
       res.responseType = method.response.responseType;
-      res.format = null; // TODO  this values is not set yet.
+      res.format = method.response.format; // TODO  this values is not set yet.
 
       m.response = res;
       serviceMethods.push(m);
