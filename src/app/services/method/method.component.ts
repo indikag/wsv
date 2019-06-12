@@ -80,9 +80,11 @@ export class MethodComponent implements OnInit, WsCallback {
   }
 
   loadInitialData() {
+    console.log('set initial data');
     if (this.serviceModel !== undefined) {
       this.parameterList = this.selectedMethod.parameters;
       this.currentResponse = this.selectedMethod.response;
+      this.currentFormatList = this.currentResponse.format;
     } else {
       this.alertService.error('Service Model cannot be null');
     }
