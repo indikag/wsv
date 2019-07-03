@@ -2,7 +2,7 @@
 	<div class="navbar-brand">
 		<!-- <img src="../../assets/images/mainimage.png" width="auto" height="30" class="d-inline-block align-top ml-1 mr-1" alt=""> -->
 		<!-- <i class="fab fa-nintendo-switch"></i> -->
-		<p class="d-inline-block align-top ml-1 mr-1 h4">Service App</p>
+		<p class="d-inline-block align-top ml-1 mr-1 h4" (click)="goHome()">Service App</p>
 		<div class="d-inline-block align-top vertical-line ml-1 mr-1"></div>
 	</div>
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -22,7 +22,7 @@
 <div class="container">
 
 	<!--Header-->
-	<div class="card">
+	<div class="card mt-3">
 		<div class="card-header">
 			Service
 		</div>
@@ -37,7 +37,7 @@
 			</div>
 
 			<!--service description-->
-			<div class="input-group">
+			<div class="input-group mb-3">
 				<div class="input-group-prepend">
 					<span class="input-group-text">Service Description</span>
 				</div>
@@ -50,12 +50,12 @@
 	</div>
 
 	<!--Method List-->
-	<div class="card" *ngIf="serviceMethods.length > 0">
+	<div class="card mt-3" *ngIf="serviceMethods.length > 0">
 		<div class="card-header">Methods</div>
 		<div class="card-body">
 			<div class="container row">
 				<div *ngFor="let serviceMethod of serviceMethods">
-					<div class="card" style="width: 18rem;">
+					<div class="card mr-2 mt-2" style="width: 18rem;">
 						<div class="card-body">
 							<h5 class="card-title">{{serviceMethod.methodName}}</h5>
 							<p class="card-text">{{serviceMethod.type}}</p>
@@ -65,8 +65,8 @@
 								*ngIf="currentResponse == undefined">Add Response</button>-->
 							<!--Edit method-->
 							<button type="button" class="btn btn-primary" (click)="editMethod(serviceMethod)">Edit</button>
-							<button type="button" class="btn btn-primary" (click)="changeMethodNameType(serviceMethod, template)">Change</button>
-							<button type="button" class="btn btn-primary" (click)="deleteMethod(serviceMethod)">Delete Method</button>
+							<button type="button" class="btn btn-primary ml-1 mr-1" (click)="changeMethodNameType(serviceMethod, template)">Modify</button>
+							<button type="button" class="btn btn-primary" (click)="deleteMethod(serviceMethod)">Delete</button>
 						</div>
 					</div>
 				</div>
@@ -74,65 +74,8 @@
 		</div>
 	</div>
 
-	<!--Parameter List-->
-	<!--<div class="card" *ngIf="parameterList.length > 0">
-		<div class="card-header">Parameters</div>
-		<div class="card-body">
-			<div class="container row">
-				<div *ngFor="let parameter of parameterList">
-					<div class="card" style="width: 18rem;">
-						<div class="card-body">
-							<h5 class="card-title">{{parameter.parameterName}}</h5>
-							<p class="card-text">{{parameter.parameterValue}}</p>
-							<p class="card-text">{{parameter.parameterType}}</p>
-							<button type="button" class="btn btn-primary">Edit</button>
-							<button type="button" class="btn btn-primary">Delete</button>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<div class="card" *ngIf="currentResponse != null || currentResponse != undefined">
-		<div class="card-header">Response</div>
-		<div class="card-body">
-			<div class="card" style="width: 18rem;">
-				<div class="card-body">
-					<h5 class="card-title">{{currentResponse.name}}</h5>
-					<p class="card-text">{{currentResponse.maxSize}}</p>
-					<p class="card-text">{{currentResponse.responseType}}</p>
-					<button type="button" class="btn btn-primary">Edit</button>
-					<button type="button" class="btn btn-primary" (click)="deleteResponse()">Delete</button>
-					<button type="button" class="btn btn-primary" (click)="addAttribute()">+ Attribute</button>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<div class="card" *ngIf="currentFormatList != null || currentFormatList != undefined">
-		<div class="card-header">Formats</div>
-		<div class="card-body">
-			<div class="container row">
-				<div *ngFor="let format of currentFormatList">
-					<div class="card" style="width: 18rem;">
-						<div class="card-body">
-							<h5 class="card-title">{{format.name}}</h5>
-							<p class="card-text">{{format.type}}</p>
-
-							<button type="button" class="btn btn-primary" *ngIf="format.complexDataFormat != null"
-								(click)="addComplexModel()">+Model</button>
-							<button type="button" class="btn btn-primary" *ngIf="format.simpleDataFormat != null"
-								(click)="addSimpleModel(format)">+Value Type</button>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
--->
-	<button type="button" *ngIf="serviceId == undefined" class="btn btn-primary" (click)="onSaveButtonClick()">Save</button>
-	<button type="button" *ngIf="serviceId != undefined" class="btn btn-primary" (click)="onUpdateButtonClick()">Update</button>
+	<button type="button" *ngIf="serviceId == undefined" class="btn btn-primary mt-3" (click)="onSaveButtonClick()">Save</button>
+	<button type="button" *ngIf="serviceId != undefined" class="btn btn-primary mt-3" (click)="onUpdateButtonClick()">Update</button>
 </div>
 
 <!--Method Modal-->
@@ -156,8 +99,14 @@
 					</div>
 					<div class="form-group">
 						<label for="message-text" class="col-form-label">Type:</label>
-						<input type="text" class="form-control" id="message-text" name="message-text"
-							[(ngModel)]="currentMethod.type">
+						<!--<input type="text" class="form-control" id="message-text" name="message-text"
+							[(ngModel)]="currentMethod.type">-->
+						<!--<select class="form-control" [(ngModel)]="currentMethod.type">
+							<option>GET</option>
+							<option>POST</option>
+						</select>-->
+						<!--<ng-select name="httpMethods" class="form-control" [items]="httpMethods" bindLabel="name" autofocus bindValue="id" [(ngModel)]="currentMethod.type"></ng-select>-->
+						<ng-select name="httpMethods" [items]="httpMethods"  [(ngModel)]="currentMethod.type"></ng-select>
 					</div>
 				</form>
 			</div>
@@ -170,6 +119,7 @@
 	</div>
 </div>
 
+<!--Update Modal-->
 <div bsModal #changeMethodModal="bs-modal" class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
 	aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
@@ -190,8 +140,14 @@
 					</div>
 					<div class="form-group">
 						<label for="message-text" class="col-form-label">Type:</label>
-						<input type="text" class="form-control" id="message-text" name="message-text"
-							[(ngModel)]="currentMethod.type">
+						<!--<input type="text" class="form-control" id="message-text" name="message-text"
+							[(ngModel)]="currentMethod.type">-->
+							<!--<select class="form-control" [(ngModel)]="currentMethod.type">
+								<option [selected]="currentMethod.type === 'get'">GET</option>
+								<option [selected]="currentMethod.type === 'post'">POST</option>
+							</select>-->
+							<!--<ng-select name="httpMethods" class="form-control" [items]="httpMethods" bindLabel="name" autofocus bindValue="id" [(ngModel)]="currentMethod.type"></ng-select>-->
+							<ng-select name="httpMethods" [items]="httpMethods"  [(ngModel)]="currentMethod.type"></ng-select>
 					</div>
 				</form>
 			</div>

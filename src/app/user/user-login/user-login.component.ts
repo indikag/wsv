@@ -5,6 +5,7 @@ import { WsResponse } from '../../services/util/ws-response.model';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import { Constants } from 'src/app/util/constants';
+import { AlertService } from 'src/app/util/alert/alert.service';
 
 @Component({
 	selector: 'app-user-login',
@@ -16,9 +17,9 @@ export class UserLoginComponent implements OnInit, WsCallback {
 	public userName: string;
 	public password: string;
 
-	public showPassword: boolean = false;
+	public showPassword = false;
 
-	constructor(private userService: UserService, private router: Router) { }
+	constructor(private userService: UserService, private router: Router, private alertService: AlertService) { }
 
 	public clickOnSignInButton() {
 		console.log('click on the save button, uname=' + this.userName + ' pass=' + this.password);
@@ -37,6 +38,7 @@ export class UserLoginComponent implements OnInit, WsCallback {
 
 	onFail(data: WsResponse, serviceType: WsType) {
 		if (serviceType === WsType.LOGIN) {
+			this.alertService.error('invalid user');
 			console.log(data.statusDescription);
 		}
 	}

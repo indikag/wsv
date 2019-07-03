@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { AppMaterialModule } from './app-material/app-material.module';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { ArchwizardModule } from 'angular-archwizard';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -51,10 +52,11 @@ import { BasicRequest } from './util/basic-request';
     FormsModule,
     HttpClientModule,
     TabsModule.forRoot(),
-    AlertModule.forRoot(),
+    // AlertModule.forRoot(),
     TooltipModule.forRoot(),
     ModalModule.forRoot(),
-    ArchwizardModule
+    ArchwizardModule,
+    NgSelectModule
   ],
   providers: [
     DataService,

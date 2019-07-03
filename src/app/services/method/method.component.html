@@ -2,7 +2,7 @@
 	<div class="navbar-brand">
 		<!-- <img src="../../assets/images/mainimage.png" width="auto" height="30" class="d-inline-block align-top ml-1 mr-1" alt=""> -->
 		<!-- <i class="fab fa-nintendo-switch"></i> -->
-		<p class="d-inline-block align-top ml-1 mr-1 h4">Service App</p>
+		<p class="d-inline-block align-top ml-1 mr-1 h4" (click)="goHome()">Service App_</p>
 		<div class="d-inline-block align-top vertical-line ml-1 mr-1"></div>
 	</div>
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -21,14 +21,13 @@
 
 <!--Body-->
 <div class="container">
-	<div>
+	<div class="mt-3">
 		<button type="button" class="btn btn-primary" (click)="addParameter()">Add Parameters</button>
-		<button type="button" class="btn btn-primary" (click)="addResponse()" *ngIf="currentResponse == undefined">Add
-			Response</button>
+		<button type="button" class="btn btn-primary" (click)="addResponse()" *ngIf="currentResponse == undefined">Add Response</button>
 	</div>
 
 	<!--Parameter List-->
-	<div class="card" *ngIf="parameterList.length > 0">
+	<div class="card mt-3" *ngIf="parameterList !== undefined && parameterList.length > 0">
 		<div class="card-header">Parameters</div>
 		<div class="card-body">
 			<div class="container row">
@@ -48,7 +47,7 @@
 	</div>
 
 	<!--Response-->
-	<div class="card" *ngIf="currentResponse != null || currentResponse != undefined">
+	<div class="card mt-3" *ngIf="currentResponse != null && currentResponse != undefined">
 		<div class="card-header">Response</div>
 		<div class="card-body">
 			<div class="card" style="width: 18rem;">
@@ -65,7 +64,7 @@
 	</div>
 
 	<!--Attributes of the selected response-->
-	<div class="card" *ngIf="currentFormatList != null || currentFormatList != undefined">
+	<div class="card mt-3" *ngIf="currentFormatList != null || currentFormatList != undefined">
 		<div class="card-header">Formats</div>
 		<div class="card-body">
 			<div class="container row">
@@ -87,7 +86,7 @@
 	</div>
 
 	<!--Save Button (Must be the bottom)-->
-	<button type="button" class="btn btn-primary" (click)="onSaveButtonClick()">Save</button>
+	<button type="button" class="btn btn-primary mt-3" (click)="onSaveButtonClick()">Save</button>
 </div>
 
 

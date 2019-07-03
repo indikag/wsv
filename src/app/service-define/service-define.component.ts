@@ -23,12 +23,12 @@ import { AlertService } from '../util/alert/alert.service';
 export class ServiceDefineComponent implements OnInit, WsCallback {
   @ViewChild('changeMethodModal') changeMethodModal: ModalDirective;
   @ViewChild('methodModal') childModal: ModalDirective;
-  @ViewChild('parameterModal') parameterModal: ModalDirective;
-  @ViewChild('responseModal') responseModal: ModalDirective;
-  @ViewChild('formatModal') formatModal: ModalDirective;
+  // @ViewChild('parameterModal') parameterModal: ModalDirective;
+  // @ViewChild('responseModal') responseModal: ModalDirective;
+  // @ViewChild('formatModal') formatModal: ModalDirective;
 
-  @ViewChild('simpleFormatModal') simpleFormatModal: ModalDirective;
-  @ViewChild('complexFormatModal') complexFormatModal: ModalDirective;
+  // @ViewChild('simpleFormatModal') simpleFormatModal: ModalDirective;
+  // @ViewChild('complexFormatModal') complexFormatModal: ModalDirective;
 
   // Parent service model
   public serviceModel: ServiceModel = new ServiceModel();
@@ -41,7 +41,7 @@ export class ServiceDefineComponent implements OnInit, WsCallback {
   // Current parameter
   public currentParameter: Parameter = new Parameter();
   // Response model
-  public currentResponse: Response;
+  // public currentResponse: Response;
   // simple format model
   public currentSimpleFormat: SimpleDataFormat = new SimpleDataFormat();
   // complex data format
@@ -50,6 +50,9 @@ export class ServiceDefineComponent implements OnInit, WsCallback {
   public currentFormat: Format;
   // current format model list
   public currentFormatList: Format[] = [];
+  // supporting http methods
+  // public httpMethods = [{id: 'get', name: 'GET'}, {id: 'post', name: 'POST'}];
+  public httpMethods = ['GET', 'POST'];
 
   public currentComplexDataFormat: ComplexDataFormat;
   public currentSimpleDataFormat: SimpleDataFormat;
@@ -79,43 +82,6 @@ export class ServiceDefineComponent implements OnInit, WsCallback {
     }
   }
 
-  // for testing purposes (initial data loading part)
-  setInitialValues() {
-    const service = new ServiceModel();
-    service.serviceName = 'User Profile Service';
-    service.serviceDescription = 'Get user profile information';
-
-    const method1 = new ServiceMethods();
-    const methodList: ServiceMethods[] = [];
-    const paramList: Parameter[] = [];
-
-    method1.methodName = 'getUserInformation';
-    method1.type = 'POST';
-    method1.parameters = paramList;
-    methodList.push(method1);
-    service.serviceMethods = methodList;
-
-    const param = new Parameter();
-    param.parameterName = 'userId';
-    param.parameterType = 'String';
-    param.parameterValue = '3222-244-111';
-    paramList.push(param);
-
-    const res = new Response();
-    res.maxSize = 3;
-    res.minSize = 1;
-    res.name = 'Profile';
-    res.responseType = 'Modal';
-    method1.response = res;
-
-    this.serviceModel = service;
-    this.currentMethod = method1;
-    this.currentParameter = param;
-    this.parameterList = paramList;
-    this.serviceMethods = methodList;
-    this.currentResponse = res;
-  }
-
   // Show edit method page
   public editMethod(serviceMethod: ServiceMethods) {
     // const data: NavigationExtras = {selectedMethod: this.currentMethod};
@@ -128,7 +94,8 @@ export class ServiceDefineComponent implements OnInit, WsCallback {
     this.dataService.setServiceModel(this.serviceModel);
     this.dataService.setSelectedMethod(serviceMethod);
     console.log(this.currentMethod);
-    this.router.navigateByUrl('method');
+    // this.router.navigateByUrl('method');
+    this.router.navigate(['method'], { queryParams: { sId: this.serviceId, mName: serviceMethod.methodName } });
   }
 
   public addMethod(template: TemplateRef<any>) {
@@ -234,18 +201,26 @@ export class ServiceDefineComponent implements OnInit, WsCallback {
       m.parameters = method.parameters;
       m.type = method.type;
 
-      const res = new Response();
-      res.minSize = 0;
-      res.maxSize = method.response.maxSize;
-      res.name = method.response.name;
-      res.responseType = method.response.responseType;
-      res.format = method.response.format; // TODO  this values is not set yet.
+      if (method.response !== undefined) {
+        const res = new Response();
+        res.minSize = 0;
+        res.maxSize = (method.response !== undefined && method.response !== null) ? method.response.maxSize : 0;
+        res.name = (method.response !== undefined && method.response !== null) ? method.response.name : '';
+        res.responseType = (method.response !== undefined && method.response !== null) ? method.response.responseType : '';
+        res.format = (method.response !== undefined && method.response !== null) ? method.response.format : '';
 
-      m.response = res;
+        m.response = res;
+      }
+
       serviceMethods.push(m);
     });
+
     sModel.serviceMethods = serviceMethods;
 
     return sModel;
+  }
+
+  goHome() {
+    this.router.navigateByUrl('home');
   }
 }

@@ -670,4 +670,10 @@ input:required {
     color: $purple-bg-color !important;
     border-color: $primary-color !important;
 }
-
+.floating-alert {
+    position: fixed;
+    top: 10px;
+    width: 30%;
+    left: 35%;
+    z-index: 1051;
+    }

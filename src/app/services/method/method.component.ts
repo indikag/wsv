@@ -82,9 +82,15 @@ export class MethodComponent implements OnInit, WsCallback {
   loadInitialData() {
     console.log('set initial data');
     if (this.serviceModel !== undefined) {
-      this.parameterList = this.selectedMethod.parameters;
-      this.currentResponse = this.selectedMethod.response;
-      this.currentFormatList = this.currentResponse.format;
+      if (this.selectedMethod.parameters !== undefined) {
+        this.parameterList = this.selectedMethod.parameters;
+      }
+      if (this.selectedMethod.response !== undefined) {
+        this.currentResponse = this.selectedMethod.response;
+      }
+      if (this.currentResponse !== undefined) {
+        this.currentFormatList = this.selectedMethod.response.format;
+      }
     } else {
       this.alertService.error('Service Model cannot be null');
     }
@@ -242,5 +248,9 @@ export class MethodComponent implements OnInit, WsCallback {
     } else if (serviceType === WsType.GET_SERVICE_BY_SERVICE_ID) {
       this.alertService.error(data.statusDescription, false);
     }
+  }
+
+  goHome() {
+    this.router.navigateByUrl('home');
   }
 }
