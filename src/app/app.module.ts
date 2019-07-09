@@ -1,11 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms';
 import { AppMaterialModule } from './app-material/app-material.module';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { ArchwizardModule } from 'angular-archwizard';
-import { NgSelectModule } from '@ng-select/ng-select';
+import { NgSelectModule} from '@ng-select/ng-select';
+import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -49,14 +49,14 @@ import { BasicRequest } from './util/basic-request';
     BrowserAnimationsModule,
     AppMaterialModule,
     AppRoutingModule,
-    FormsModule,
     HttpClientModule,
     TabsModule.forRoot(),
     // AlertModule.forRoot(),
     TooltipModule.forRoot(),
     ModalModule.forRoot(),
     ArchwizardModule,
-    NgSelectModule
+    NgSelectModule,
+    FormsModule
   ],
   providers: [
     DataService,

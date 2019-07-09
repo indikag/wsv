@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { ServiceMethods } from 'src/app/service-define/service-model-class/service-methods.model';
 import { Router } from '@angular/router';
 import { DataService } from 'src/app/data.service';
@@ -55,6 +55,16 @@ export class MethodComponent implements OnInit, WsCallback {
   // Common variables for the class
   private modalRef: BsModalRef;
 
+  // Already defined value types
+  public valueTypes = [{id: 'name', text: 'name'}, {id: 'address', text: 'address'}, {id: 'date', text: 'date'},
+   {id: 'phoneNumber', text: 'phoneNumber'}, {id: 'country', text: 'country'}, {id: 'company', text: 'company'},
+   {id: 'yes_no', text: 'yes_no'}, {id: 'age', text: 'age'}, {id: 'paragraph', text: 'paragraph'}, {id: 'email', text: 'email'},
+   {id: 'book', text: 'book'}, {id: 'university', text: 'university'}, {id: 'number', text: 'number'},
+   {id: 'price', text: 'price'}, {id: 'float', text: 'float'}];
+
+   // Parameter types
+   public parameterTypes = [{id: 'integer', text: 'Integer'}, {id: 'string', text: 'String'},
+    {id: 'boolean', text: 'Boolean'}, {id: 'decimal', text: 'Decimal'}];
 
   // utility variables
   public isRandom = true;
@@ -73,14 +83,10 @@ export class MethodComponent implements OnInit, WsCallback {
     if (this.selectedMethod === undefined) {
       this.router.navigateByUrl('home');
     }
-
     this.loadInitialData();
-
-    console.log('this is the method ' + this.selectedMethod);
   }
 
   loadInitialData() {
-    console.log('set initial data');
     if (this.serviceModel !== undefined) {
       if (this.selectedMethod.parameters !== undefined) {
         this.parameterList = this.selectedMethod.parameters;
@@ -175,6 +181,9 @@ export class MethodComponent implements OnInit, WsCallback {
 
   // shows the value type adding window.
   addValueType(format: Format) {
+    if (format === undefined || format === null) {
+      format = new Format();
+    }
     this.currentFormat = format;
     this.currentSimpleFormat = new SimpleDataFormat();
     this.simpleFormatModal.show();

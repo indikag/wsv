@@ -2,7 +2,7 @@
 	<div class="navbar-brand">
 		<!-- <img src="../../assets/images/mainimage.png" width="auto" height="30" class="d-inline-block align-top ml-1 mr-1" alt=""> -->
 		<!-- <i class="fab fa-nintendo-switch"></i> -->
-		<p class="d-inline-block align-top ml-1 mr-1 h4" (click)="goHome()">Service App_</p>
+		<p class="d-inline-block align-top ml-1 mr-1 h4" (click)="goHome()">Service App</p>
 		<div class="d-inline-block align-top vertical-line ml-1 mr-1"></div>
 	</div>
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -23,7 +23,8 @@
 <div class="container">
 	<div class="mt-3">
 		<button type="button" class="btn btn-primary" (click)="addParameter()">Add Parameters</button>
-		<button type="button" class="btn btn-primary" (click)="addResponse()" *ngIf="currentResponse == undefined">Add Response</button>
+		<button type="button" class="btn btn-primary" (click)="addResponse()" *ngIf="currentResponse == undefined">Add
+			Response</button>
 	</div>
 
 	<!--Parameter List-->
@@ -37,8 +38,10 @@
 							<h5 class="card-title">{{parameter.parameterName}}</h5>
 							<p class="card-text">{{parameter.parameterValue}}</p>
 							<p class="card-text">{{parameter.parameterType}}</p>
-							<button type="button" class="btn btn-primary" (click)="editParameter(parameter)">Edit</button>
-							<button type="button" class="btn btn-primary" (click)="deleteParameter(parameter)">Delete</button>
+							<button type="button" class="btn btn-primary"
+								(click)="editParameter(parameter)">Edit</button>
+							<button type="button" class="btn btn-primary"
+								(click)="deleteParameter(parameter)">Delete</button>
 						</div>
 					</div>
 				</div>
@@ -55,9 +58,9 @@
 					<h5 class="card-title">{{currentResponse.name}}</h5>
 					<p class="card-text">{{currentResponse.maxSize}}</p>
 					<p class="card-text">{{currentResponse.responseType}}</p>
-					<button type="button" class="btn btn-primary">Edit</button>
-					<button type="button" class="btn btn-primary" (click)="deleteResponse()">Delete</button>
-					<button type="button" class="btn btn-primary" (click)="addAttribute()">+ Attribute</button>
+					<button type="button" class="btn btn-primary mr-1">Edit</button>
+					<button type="button" class="btn btn-primary mr-1" (click)="deleteResponse()">Delete</button>
+					<button type="button" class="btn btn-primary mr-1" (click)="addAttribute()">Attribute</button>
 				</div>
 			</div>
 		</div>
@@ -69,7 +72,7 @@
 		<div class="card-body">
 			<div class="container row">
 				<div *ngFor="let format of currentFormatList">
-					<div class="card" style="width: 18rem;">
+					<div class="card ml-2 mt-2" style="width: 18rem;">
 						<div class="card-body">
 							<h5 class="card-title">{{format.name}}</h5>
 							<p class="card-text">{{format.type}}</p>
@@ -127,8 +130,10 @@
 					<!--Parameter Type-->
 					<div class="form-group">
 						<label for="parameter-type" class="col-form-label">Parameter Type:</label>
-						<input type="text" class="form-control" id="parameter-type" name="parameter-type"
-							[(ngModel)]="currentParameter.parameterType">
+						<!--<input type="text" class="form-control" id="parameter-type" name="parameter-type" [(ngModel)]="currentParameter.parameterType">-->
+						<ng-select name="parameter-type" [items]="parameterTypes" [(ngModel)]="currentParameter.parameterType"
+							placeholder="Select type" bindLabel="text" bindValue="id" [virtualScroll]="true">
+						</ng-select>
 					</div>
 				</form>
 			</div>
@@ -199,8 +204,8 @@
 
 <!--Value Type Modal-->
 <!--This will be referred as simple data format-->
-<div bsModal #simpleFormatModal="bs-modal" *ngIf="this.currentFormat !== undefined" class="modal fade" id="simpleFormatModal" tabindex="-1" role="dialog"
-	aria-labelledby="simpleFormatModalLabel" aria-hidden="true">
+<div bsModal #simpleFormatModal="bs-modal" class="modal fade"
+	id="simpleFormatModal" tabindex="-1" role="dialog" aria-labelledby="simpleFormatModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -225,24 +230,30 @@
 					<!--Format Specific Value-->
 					<div class="form-group" *ngIf="isRandom">
 						<label for="parameter-value" class="col-form-label">Type:</label>
-						<input type="text" class="form-control" id="format-specific-value" name="format-specific-value" *ngIf="this.currentFormat.simpleDataFormat !== undefined"
-							[(ngModel)]="this.currentFormat.simpleDataFormat.type">
+						<!--<input type="text" class="form-control" id="format-specific-value" name="format-specific-value" *ngIf="this.currentFormat.simpleDataFormat !== undefined" [(ngModel)]="this.currentFormat.simpleDataFormat.type">-->
+						<ng-select *ngIf="this.currentFormat !== undefined && this.currentFormat.simpleDataFormat !== undefined"
+							name="format-specific-value" [items]="valueTypes" [(ngModel)]="this.currentFormat.simpleDataFormat.type"
+							placeholder="Select type" bindLabel="text" bindValue="id" [virtualScroll]="true">
+						</ng-select>
 					</div>
 					<div class="form-group" *ngIf="isRandom">
-							<label for="parameter-value" class="col-form-label">Maximum Character Limit :</label>
-							<input type="text" class="form-control" id="format-specific-value" name="format-specific-value" *ngIf="this.currentFormat.simpleDataFormat !== undefined"
-								[(ngModel)]="this.currentFormat.simpleDataFormat.charLimit">
-						</div>
+						<label for="parameter-value" class="col-form-label">Maximum Character Limit :</label>
+						<input type="text" class="form-control" id="format-specific-value" name="format-specific-value"
+							*ngIf="this.currentFormat !== undefined && this.currentFormat.simpleDataFormat !== undefined"
+							[(ngModel)]="this.currentFormat.simpleDataFormat.charLimit">
+					</div>
 					<!--Format Default Value-->
 					<div class="form-group" *ngIf="!isRandom">
-							<label for="parameter-value" class="col-form-label">Custom Value:</label>
-							<input type="text" class="form-control" id="format-specific-value" name="format-specific-value" *ngIf="this.currentFormat.simpleDataFormat !== undefined"
-								[(ngModel)]="this.currentFormat.simpleDataFormat.defaultValue">
+						<label for="parameter-value" class="col-form-label">Custom Value:</label>
+						<input type="text" class="form-control" id="format-specific-value" name="format-specific-value"
+							*ngIf="this.currentFormat !== undefined && this.currentFormat.simpleDataFormat !== undefined"
+							[(ngModel)]="this.currentFormat.simpleDataFormat.defaultValue">
 					</div>
 				</form>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="simpleFormatModal.hide()">Cancel</button>
+				<button type="button" class="btn btn-secondary" data-dismiss="modal"
+					(click)="simpleFormatModal.hide()">Cancel</button>
 				<button type="button" class="btn btn-primary" (click)="addSimpleDataType($event)">Add</button>
 			</div>
 		</div>
@@ -250,8 +261,8 @@
 </div>
 
 <!--Complex Format Modal-->
-<div bsModal #complexFormatModal="bs-modal" *ngIf="this.currentFormat !== undefined" class="modal fade" id="parameterModal" tabindex="-1" role="dialog"
-	aria-labelledby="parameterModalLabel" aria-hidden="true">
+<div bsModal #complexFormatModal="bs-modal" *ngIf="this.currentFormat !== undefined" class="modal fade"
+	id="parameterModal" tabindex="-1" role="dialog" aria-labelledby="parameterModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
